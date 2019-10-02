@@ -1,26 +1,15 @@
-import gql from 'graphql-tag';
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 
-const QUERY = gql`
-  {
-    me {
-      id
-      firstName
-      lastName
-      email
-    }
-  }
-`;
+import { useMeQuery } from '../generated/graphql';
 
 const Index = () => {
-  const { loading, data } = useQuery(QUERY);
+  const { loading, data } = useMeQuery();
 
   if (loading || !data) {
-    return <p>loading...</p>;
+    return <div>loading...</div>;
   }
 
-  return <p>{JSON.stringify(data)}</p>;
+  return <div>{data.me!.email}</div>;
 };
 
 export default Index;
