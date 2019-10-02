@@ -75,12 +75,44 @@ export type User = {
   email: Scalars['String'];
   name: Scalars['String'];
 };
+export type RegisterMutationVariables = {
+  data: RegisterInput;
+};
+
+export type RegisterMutation = { __typename?: 'Mutation' } & {
+  register: { __typename?: 'User' } & Pick<User, 'id' | 'firstName' | 'lastName' | 'email' | 'name'>;
+};
+
 export type MeQueryVariables = {};
 
 export type MeQuery = { __typename?: 'Query' } & {
   me: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'firstName' | 'lastName' | 'email'>>;
 };
 
+export const RegisterDocument = gql`
+  mutation Register($data: RegisterInput!) {
+    register(data: $data) {
+      id
+      firstName
+      lastName
+      email
+      name
+    }
+  }
+`;
+export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+
+export function useRegisterMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>,
+) {
+  return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+}
+export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
+export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  RegisterMutation,
+  RegisterMutationVariables
+>;
 export const MeDocument = gql`
   query Me {
     me {

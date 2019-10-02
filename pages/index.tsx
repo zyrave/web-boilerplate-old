@@ -2,7 +2,9 @@ import React from 'react';
 
 import { useMeQuery } from '../generated/graphql';
 
-const Index = () => {
+interface Props {}
+
+const Index: React.FC<Props> = () => {
   const { loading, data } = useMeQuery();
 
   if (loading || !data) {
