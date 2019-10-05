@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
+import { NextPage } from "next";
 
-import { useMeQuery } from '../generated/graphql';
+import { useMeQuery } from "../generated/graphql";
 
 interface Props {}
 
-const Index: React.FC<Props> = () => {
+const Index: NextPage<Props> = () => {
   const { loading, data } = useMeQuery();
 
   if (loading || !data) {
