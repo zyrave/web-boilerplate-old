@@ -1,10 +1,11 @@
-import React from "react";
-import { NextPage } from "next";
-import { Formik, Field } from "formik";
+import React from 'react';
+import { NextPage } from 'next';
+import { Formik, Field } from 'formik';
+import Router from 'next/router';
 
-import Layout from "../../components/Layout";
-import { InputField } from "../../components/fields/InputField";
-import { useRegisterMutation } from "../../generated/graphql";
+import Layout from '../../components/Layout';
+import { InputField } from '../../components/fields/InputField';
+import { useRegisterMutation } from '../../generated/graphql';
 
 interface Props {}
 
@@ -15,24 +16,23 @@ const Register: NextPage<Props> = () => {
     <Layout title="Register Page">
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          password: ""
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
         }}
         onSubmit={async (data, { setErrors }) => {
           try {
             await register({ variables: { data } });
+            Router.push('/user/check-email');
           } catch (err) {
             const errors: { [key: string]: string } = {};
 
-            err.graphQLErrors[0].extensions.exception.validationErrors.map(
-              (validationErr: any) => {
-                Object.values(validationErr.constraints).map((message: any) => {
-                  errors[validationErr.property] = message;
-                });
-              }
-            );
+            err.graphQLErrors[0].extensions.exception.validationErrors.map((validationErr: any) => {
+              Object.values(validationErr.constraints).map((message: any) => {
+                errors[validationErr.property] = message;
+              });
+            });
             setErrors(errors);
           }
         }}
@@ -40,23 +40,10 @@ const Register: NextPage<Props> = () => {
         validateOnChange={false}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Field
-              name="firstName"
-              placeholder="First Name"
-              component={InputField}
-            />
-            <Field
-              name="lastName"
-              placeholder="Last Name"
-              component={InputField}
-            />
+            <Field name="firstName" placeholder="First Name" component={InputField} />
+            <Field name="lastName" placeholder="Last Name" component={InputField} />
             <Field name="email" placeholder="Email" component={InputField} />
-            <Field
-              name="password"
-              type="password"
-              placeholder="Password"
-              component={InputField}
-            />
+            <Field name="password" type="password" placeholder="Password" component={InputField} />
             <button type="submit">Submit</button>
           </form>
         )}

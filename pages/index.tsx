@@ -1,7 +1,7 @@
-import React from "react";
-import { NextPage } from "next";
+import React from 'react';
+import { NextPage } from 'next';
 
-import { useMeQuery } from "../generated/graphql";
+import { useMeQuery } from '../generated/graphql';
 
 interface Props {}
 
