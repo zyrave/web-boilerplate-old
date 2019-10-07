@@ -19,16 +19,16 @@ const Layout: React.FC<Props> = ({ children, title = 'This is the default title'
           <a>Home</a>
         </Link>{' '}
         |{' '}
-        <Link href="/list-fc">
-          <a>List as Functional Component</a>
+        <Link href="/hello">
+          <a>Hello (Protected Page)</a>
         </Link>{' '}
         |{' '}
-        <Link href="/list-class">
-          <a>List As Class</a>
+        <Link href="/user/register">
+          <a>Register</a>
         </Link>{' '}
         |{' '}
-        <Link href="/about">
-          <a>About</a>
+        <Link href="/user/login">
+          <a>Login</a>
         </Link>{' '}
         |{' '}
       </nav>

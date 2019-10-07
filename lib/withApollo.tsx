@@ -57,8 +57,8 @@ export default (App: any) =>
           // Handle them in components via the data.error prop:
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
           console.error('Error while running `getDataFromTree`', error);
-          if (error.message.includes('not authenticated')) {
-            redirect(ctx.ctx, '/login');
+          if (error.message.includes('Access denied! You need to be authorized to perform this action!')) {
+            redirect(ctx.ctx, '/user/login');
           }
         }
 

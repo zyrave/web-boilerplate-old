@@ -2,6 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import { useMeQuery } from '../generated/graphql';
+import Layout from '../components/Layout';
 
 interface Props {}
 
@@ -9,10 +10,18 @@ const Index: NextPage<Props> = () => {
   const { loading, data } = useMeQuery();
 
   if (loading || !data) {
-    return <div>loading...</div>;
+    return (
+      <Layout>
+        <div>loading...</div>
+      </Layout>
+    );
   }
 
-  return <div>{data.me!.email}</div>;
+  return (
+    <Layout>
+      <div>Email: {data.me ? data.me!.email : 'loading...'}</div>
+    </Layout>
+  );
 };
 
 export default Index;

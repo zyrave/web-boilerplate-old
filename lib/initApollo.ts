@@ -30,8 +30,8 @@ function create(initialState: any, { getToken }: Options) {
       graphQLErrors.map(({ message, locations, path }) => {
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
 
-        if (isBrowser && message.includes('not authenticated')) {
-          Router.replace('/login');
+        if (isBrowser && message.includes('Access denied! You need to be authorized to perform this action!')) {
+          Router.replace('/user/login');
         }
       });
     if (networkError) console.log(`[Network error]: ${networkError}`);
