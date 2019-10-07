@@ -27,6 +27,10 @@ const Layout: React.FC<Props> = ({ children, title = 'This is the default title'
           <a>Register</a>
         </Link>{' '}
         |{' '}
+        <Link href="/user/forgot-password">
+          <a>Forgot Password</a>
+        </Link>{' '}
+        |{' '}
         <Link href="/user/login">
           <a>Login</a>
         </Link>{' '}
