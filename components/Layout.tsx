@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import { useMeQuery } from '../generated/graphql';
 
@@ -8,11 +9,15 @@ interface Props {
   title?: string;
 }
 
+const Container = styled('div')`
+  background-color: #ecfcff;
+`;
+
 const Layout: React.FC<Props> = ({ children, title = '' }) => {
   const { loading, data } = useMeQuery();
 
   return (
-    <div>
+    <Container>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
@@ -54,7 +59,7 @@ const Layout: React.FC<Props> = ({ children, title = '' }) => {
         <hr />
         <span>I'm here to stay (Footer)</span>
       </footer>
-    </div>
+    </Container>
   );
 };
 
