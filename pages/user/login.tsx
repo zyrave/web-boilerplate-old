@@ -5,7 +5,7 @@ import Router from 'next/router';
 
 import Layout from '../../components/Layout';
 import { InputField } from '../../components/fields/InputField';
-import { useLoginMutation } from '../../generated/graphql';
+import { useLoginMutation, MeDocument } from '../../generated/graphql';
 
 interface Props {}
 
@@ -20,7 +20,18 @@ const Login: NextPage<Props> = () => {
           password: '',
         }}
         onSubmit={async (data, { setErrors }) => {
-          const response = await login({ variables: data });
+          const response = await login({
+            variables: data,
+            update: (cache, { data: d }) => {
+              if (!d || !d.login) {
+                return;
+              }
+              cache.writeQuery({
+                query: MeDocument,
+                data: { me: d.login },
+              });
+            },
+          });
 
           if (response && response.data && !response.data.login) {
             setErrors({
