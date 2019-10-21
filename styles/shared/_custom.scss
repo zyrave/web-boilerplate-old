@@ -1,0 +1,12 @@
+// Here you can add other styles
+.sidebar .nav-item.active {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.sidebar .nav-dropdown.open {
+  background: #2f353a;
+}
+
+.sidebar .nav-dropdown.open > .nav-dropdown-items {
+  background-color: #24292d;
+}

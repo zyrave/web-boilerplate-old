@@ -1,0 +1,30 @@
+@import './shared/fonts';
+
+// CoreUI Icons Set
+// @import '~@coreui/icons/css/coreui-icons.css';
+
+// Import Flag Icons Set
+// @import '~flag-icon-css/css/flag-icon.min.css';
+
+// // Import Font Awesome Icons Set
+// @import '~font-awesome/scss/font-awesome.scss';
+
+// // Import Simple Line Icons Set
+// @import '~simple-line-icons/css/simple-line-icons.css';
+// @import './vendors/simple-line-icons.css';
+// @import '~simple-line-icons/css/simple-line-icons.css';
+
+// If you want to override variables do it here
+@import './shared/variables';
+
+// Import styles
+@import '~@coreui/coreui/scss/coreui.scss';
+
+// Temp fix for reactstrap
+@import '~@coreui/coreui/scss/_dropdown-menu-right.scss';
+
+// If you want to add something do it here
+@import './shared/custom';
+
+// ie fixes
+@import './shared/ie-fix';

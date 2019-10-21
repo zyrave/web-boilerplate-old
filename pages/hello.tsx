@@ -1,11 +1,10 @@
 import React from 'react';
+import { NextPage } from 'next';
 
 import { useHelloQuery } from '../generated/graphql';
-import Layout from '../components/Layout';
+import { Layout } from '../components';
 
-interface Props {}
-
-const Hello: React.FC<Props> = () => {
+const Hello: NextPage = () => {
   const { data } = useHelloQuery();
 
   return (

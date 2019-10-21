@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { Formik, Field } from 'formik';
 import Router from 'next/router';
 
-import Layout from '../../components/Layout';
+import { Layout } from '../../components';
 import { InputField } from '../../components/fields/InputField';
 import { useForgotPasswordMutation } from '../../generated/graphql';
 
