@@ -26,9 +26,6 @@ const SidebarToggler: React.FC<Props> = ({ children, className, display = 'lg', 
     toggle();
   };
 
-  // delete attributes.mobile;
-  // delete attributes.display;
-
   const classes = classNames(className, 'navbar-toggler');
 
   return (

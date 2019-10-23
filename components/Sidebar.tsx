@@ -82,17 +82,8 @@ const Sidebar: React.FC<Props> = ({
     }
   };
 
-  // delete attributes.compact;
-  // delete attributes.display;
-  // delete attributes.fixed;
-  // delete attributes.minimized;
-  // delete attributes.offCanvas;
-  // delete attributes.isOpen;
-  // delete attributes.staticContext;
-
   const classes = classNames(className, 'sidebar');
 
-  // sidebar-nav root
   return (
     <ClickOutHandler
       onClickOut={(e: React.FormEvent<HTMLInputElement>) => {

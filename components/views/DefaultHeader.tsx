@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
 
 import { AsideToggler, NavbarBrand, SidebarToggler } from '../../components';
-// import logo from '../../static/images/brand/logo.svg';
-// import sygnet from '../../static/images/brand/sygnet.svg';
 
 interface Props {
   onLogout: (e: React.MouseEvent<any, MouseEvent>) => void;

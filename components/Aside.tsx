@@ -46,11 +46,6 @@ const Aside: React.FC<Props> = ({
     displayBreakpoint();
   }, [display, fixed, offCanvas]);
 
-  // delete attributes.display;
-  // delete attributes.fixed;
-  // delete attributes.offCanvas;
-  // delete attributes.isOpen;
-
   const classes = classNames(className, 'aside-menu');
 
   return (

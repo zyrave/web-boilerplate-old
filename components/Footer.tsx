@@ -17,8 +17,6 @@ const Footer: React.FC<Props> = ({ children, className, fixed = 'false', ...attr
     isFixed();
   }, [fixed]);
 
-  // delete attributes.fixed;
-
   const classes = classNames(className, 'app-footer');
 
   return (

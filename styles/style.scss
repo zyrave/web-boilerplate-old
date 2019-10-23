@@ -1,18 +1,5 @@
+// Fonts
 @import './shared/fonts';
-
-// CoreUI Icons Set
-// @import '~@coreui/icons/css/coreui-icons.css';
-
-// Import Flag Icons Set
-// @import '~flag-icon-css/css/flag-icon.min.css';
-
-// // Import Font Awesome Icons Set
-// @import '~font-awesome/scss/font-awesome.scss';
-
-// // Import Simple Line Icons Set
-// @import '~simple-line-icons/css/simple-line-icons.css';
-// @import './vendors/simple-line-icons.css';
-// @import '~simple-line-icons/css/simple-line-icons.css';
 
 // If you want to override variables do it here
 @import './shared/variables';
@@ -28,3 +15,15 @@
 
 // ie fixes
 @import './shared/ie-fix';
+
+.pointer {
+  cursor: pointer;
+}
+
+.nav-dropdown-items {
+  transition: none !important;
+  -webkit-transition-property: none !important;
+  -moz-transition-property: none !important;
+  -o-transition-property: none !important;
+  transition-property: none !important;
+}

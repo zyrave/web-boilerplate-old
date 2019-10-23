@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Row, Col } from 'reactstrap';
 
 interface Props {
-  title?: string;
-  content?: string;
+  title: string;
+  content: string;
 }
 
 const Error: FC<Props> = ({ title = '', content = '' }) => (

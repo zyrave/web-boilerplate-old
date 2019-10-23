@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { withRouter } from 'next/router';
+import { withRouter, NextRouter } from 'next/router';
+import { WithRouterProps } from 'next/dist/client/with-router';
 import { Breadcrumb as RsBreadcrumb, BreadcrumbItem } from 'reactstrap';
 import classNames from 'classnames';
 
@@ -41,16 +42,17 @@ const Breadcrumbs: FC<any> = (router, routes) => {
   return <RsBreadcrumb>{items}</RsBreadcrumb>;
 };
 
-// interface Props {
-//   className?: string;
-//   appRoutes?: any;
-//   router?: any;
-// }
+interface Props {
+  className?: string;
+  appRoutes: any;
 
-const Breadcrumb: FC<any> = ({ className = '', appRoutes, router }) => {
+  router: NextRouter;
+}
+
+const Breadcrumb: FC<Props> = ({ className = '', appRoutes, router }) => {
   const classes = classNames(className);
 
   return <div className={classes}>{Breadcrumbs(router, appRoutes)}</div>;
 };
 
-export default withRouter(Breadcrumb);
+export default withRouter<WithRouterProps & Props>(Breadcrumb);

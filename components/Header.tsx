@@ -18,8 +18,6 @@ const Header: React.FC<Props> = ({ children, className, fixed = false, tag: Tag 
     isFixed();
   }, [fixed]);
 
-  // delete attributes.fixed;
-
   const classes = classNames(className, 'app-header', 'navbar');
 
   return (

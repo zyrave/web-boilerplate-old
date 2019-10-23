@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { Formik, Field } from 'formik';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Row } from 'reactstrap';
 
@@ -22,12 +22,12 @@ const Login: NextPage = () => {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="8">
+            <Col md="4">
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
-                    <h1>Login</h1>
-                    <p className="text-muted">Sign In to your account</p>
+                    <h1 className="text-center">Login</h1>
+                    <p className="text-center text-muted">Sign In to your account</p>
                     <Formik
                       initialValues={{
                         email: '',
@@ -62,27 +62,27 @@ const Login: NextPage = () => {
                           <Field
                             name="email"
                             type="email"
-                            placeholder="Email"
+                            placeholder="Email *"
                             icon="icon-user"
                             component={InputField}
                           />
                           <Field
                             name="password"
                             type="password"
-                            placeholder="Password"
+                            placeholder="Password *"
                             icon="icon-lock"
                             component={InputField}
                           />
                           <Row>
-                            <Col xs="6">
-                              <Button type="submit" color="primary" className="px-4">
+                            <Col>
+                              <Button type="submit" color="primary" block>
                                 Login
                               </Button>
                             </Col>
-                            <Col xs="6" className="text-right">
-                              <Button color="link" className="px-0">
-                                Forgot password?
-                              </Button>
+                          </Row>
+                          <Row>
+                            <Col className="text-center">
+                              <Button color="link">Forgot password?</Button>
                             </Col>
                           </Row>
                         </Form>
@@ -90,7 +90,7 @@ const Login: NextPage = () => {
                     />
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+                {/* <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
                       <h2>Sign up</h2>
@@ -105,7 +105,7 @@ const Login: NextPage = () => {
                       </Link>
                     </div>
                   </CardBody>
-                </Card>
+                </Card> */}
               </CardGroup>
             </Col>
           </Row>

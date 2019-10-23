@@ -12,7 +12,7 @@ interface Props {
 
 const Users: NextPage<Props> = ({ loading = false, error = undefined, data = [] }) => {
   if (loading) return <Loading />;
-  if (error) return <Error content={error} />;
+  if (error) return <Error title="Error" content={error} />;
 
   return (
     <Layout title="Sample - Tables">

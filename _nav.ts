@@ -76,6 +76,18 @@ export default {
         attributes: {},
       },
     },
+    {
+      name: 'Forms',
+      url: '/forms',
+      icon: 'icon-note',
+      children: [
+        {
+          name: 'Basic Forms',
+          url: '/forms',
+          icon: 'icon-note',
+        },
+      ],
+    },
     /*{
       name: 'Base',
       url: '/base',

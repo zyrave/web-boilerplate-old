@@ -11,7 +11,6 @@ interface Props {
   defaultOpen?: boolean;
   display?: any;
   mobile?: boolean;
-  tag?: JSX.Element;
   type?: any;
 }
 
@@ -40,10 +39,6 @@ const AsideToggler: React.FC<Props> = ({
     e.preventDefault();
     toggle();
   };
-
-  // delete attributes.defaultOpen;
-  // delete attributes.display;
-  // delete attributes.mobile;
 
   const classes = classNames(className, 'navbar-toggler');
 

@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
-// import { Redirect, Route, Switch } from 'react-router-dom';
-// import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import {
@@ -16,11 +15,11 @@ import {
   Breadcrumb,
   SidebarNav,
 } from '../components';
-// sidebar nav config
 import navigation from '../_nav';
-import Head from 'next/head';
-// routes config
 import routes from '../routes';
+import { useLogoutMutation } from '../generated/graphql';
+import redirect from '../lib/redirect';
+import Validation from './Validation';
 
 const DefaultAside = dynamic(() => import('./views/DefaultAside'));
 const DefaultFooter = dynamic(() => import('./views/DefaultFooter'));
@@ -31,50 +30,44 @@ interface Props {
   title: string;
 }
 
-const Layout: FC<Props> = ({ children, title }) => {
+const Layout: FC<Props> = ({ children, title }, ...ctx) => {
+  const [logout] = useLogoutMutation();
   // const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
 
-  const signOut = (e: React.MouseEvent<any, MouseEvent>) => {
+  const handleLogout = async (e: React.MouseEvent<any, MouseEvent>) => {
     e.preventDefault();
-    // this.props.history.push('/login');
+    try {
+      const response = await logout();
+
+      if (response.data) {
+        redirect(ctx, '/user/login');
+      }
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   };
 
   return (
-    <>
+    <Validation>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="app">
-        <Header fixed>{<DefaultHeader onLogout={e => signOut(e)} />}</Header>
+        <Header fixed>{<DefaultHeader onLogout={e => handleLogout(e)} />}</Header>
         <div className="app-body">
           <Sidebar fixed display="lg">
             <SidebarHeader />
             <SidebarForm />
-            <SidebarNav navConfig={navigation} /*{...props}*/ /*router={router}*/ />
+            <SidebarNav navConfig={navigation} />
             <SidebarFooter />
             {/* <SidebarMinimizer /> */}
           </Sidebar>
           <main className="main">
-            <Breadcrumb appRoutes={routes} /*router={router}*/ />
-            <Container fluid>
-              {/* <Switch>
-              {routes.map((route: any, idx: any) =>
-                route.component ? (
-                  <Route
-                    key={idx}
-                    path={route.path}
-                    exact={route.exact}
-                    name={route.name}
-                    render={props => <route.component {...props} />}
-                  />
-                ) : null,
-              )}
-              <Redirect from="/" to="/dashboard" />
-            </Switch> */}
-              {children}
-            </Container>
+            <Breadcrumb appRoutes={routes} />
+            <Container fluid>{children}</Container>
           </main>
           <Aside fixed>
             <DefaultAside />
@@ -84,7 +77,7 @@ const Layout: FC<Props> = ({ children, title }) => {
           <DefaultFooter />
         </Footer>
       </div>
-    </>
+    </Validation>
   );
 };
 

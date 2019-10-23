@@ -75,13 +75,6 @@ const Switch: React.FC<Props> = ({
     }
   }, [checked, checkedState, uncontrolled]);
 
-  // const tabindex = attributes.tabIndex;
-
-  // delete attributes.tabIndex;
-  // delete attributes.checked;
-  // delete attributes.defaultChecked;
-  // delete attributes.onChange;
-
   const classes = classNames(
     className,
     'switch',
@@ -97,7 +90,7 @@ const Switch: React.FC<Props> = ({
   const sliderClasses = classNames('switch-slider');
 
   return (
-    <label className={classes} /*tabIndex={tabindex}*/ onKeyUp={handleKeyUp} onKeyDown={handleKeyDown}>
+    <label className={classes} onKeyUp={handleKeyUp} onKeyDown={handleKeyDown}>
       <input
         type={type}
         className={inputClasses}
