@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { Formik, Field } from 'formik';
 import { Button, Card, CardBody, CardGroup, Col, Container, Form, Row } from 'reactstrap';
 
@@ -80,32 +80,26 @@ const Login: NextPage = () => {
                               </Button>
                             </Col>
                           </Row>
-                          <Row>
-                            <Col className="text-center">
-                              <Button color="link">Forgot password?</Button>
-                            </Col>
-                          </Row>
                         </Form>
                       )}
                     />
+                    <Row className="mb-4">
+                      <Col className="text-center">
+                        <Link href="/user/forgot-password">
+                          <Button color="link">Forgot password?</Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col className="text-center">
+                        Don't have an account?
+                        <Link href="/user/register">
+                          <Button color="link">Create an account</Button>
+                        </Link>
+                      </Col>
+                    </Row>
                   </CardBody>
                 </Card>
-                {/* <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
-                  <CardBody className="text-center">
-                    <div>
-                      <h2>Sign up</h2>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.
-                      </p>
-                      <Link href="/user/register">
-                        <Button color="primary" className="mt-3" active tabIndex={-1}>
-                          Register Now!
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardBody>
-                </Card> */}
               </CardGroup>
             </Col>
           </Row>
