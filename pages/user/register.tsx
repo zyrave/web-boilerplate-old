@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Router from 'next/router';
+import Link from 'next/link';
 import { Formik, Field } from 'formik';
-import { Button, Card, CardBody, Col, Container, Form, Row } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardGroup, Col, Container, Form, Row } from 'reactstrap';
 
 import { InputField } from '../../components/fields/InputField';
 import { useRegisterMutation } from '../../generated/graphql';
@@ -11,6 +12,7 @@ import { useRegisterMutation } from '../../generated/graphql';
 interface Props {}
 
 const Register: NextPage<Props> = () => {
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const [register] = useRegisterMutation();
 
   return (
@@ -23,55 +25,89 @@ const Register: NextPage<Props> = () => {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="9" lg="7" xl="6">
-              <Card className="mx-4">
-                <CardBody className="p-4">
-                  <h1>Register</h1>
-                  <p className="text-muted">Create your account</p>
-                  <Formik
-                    initialValues={{
-                      firstName: '',
-                      lastName: '',
-                      email: '',
-                      password: '',
-                    }}
-                    onSubmit={async (data, { setErrors }) => {
-                      try {
-                        await register({ variables: { data } });
-                        Router.push('/user/check-email');
-                      } catch (err) {
-                        const errors: { [key: string]: string } = {};
+            <Col md="5">
+              <CardGroup>
+                <Card className="mx-4">
+                  <CardBody className="p-4">
+                    <h1 className="text-center">Register</h1>
+                    <p className="text-center text-muted">Create an account</p>
+                    <Alert color="danger" isOpen={showAlert} className="text-center">
+                      Password doesn't match. Try again.
+                    </Alert>
+                    <Formik
+                      initialValues={{
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        password: '',
+                        confirmPassword: '',
+                      }}
+                      onSubmit={async (data, { setErrors }) => {
+                        if (data.password !== data.confirmPassword) {
+                          setShowAlert(true);
+                          return;
+                        }
 
-                        err.graphQLErrors[0].extensions.exception.validationErrors.map((validationErr: any) => {
-                          Object.values(validationErr.constraints).map((message: any) => {
-                            errors[validationErr.property] = message;
+                        setShowAlert(false);
+                        delete data.confirmPassword;
+
+                        try {
+                          await register({ variables: { data } });
+                          Router.push('/user/check-email');
+                        } catch (err) {
+                          const errors: { [key: string]: string } = {};
+
+                          err.graphQLErrors[0].extensions.exception.validationErrors.map((validationErr: any) => {
+                            Object.values(validationErr.constraints).map((message: any) => {
+                              errors[validationErr.property] = message;
+                            });
                           });
-                        });
-                        setErrors(errors);
-                      }
-                    }}
-                    validateOnBlur={false}
-                    validateOnChange={false}
-                    render={({ handleSubmit }) => (
-                      <Form onSubmit={handleSubmit}>
-                        <Field name="firstName" placeholder="First Name" icon="icon-user" component={InputField} />
-                        <Field name="lastName" placeholder="Last Name" icon="icon-user" component={InputField} />
-                        <Field name="email" placeholder="Email" icon="icon-envelope" component={InputField} />
-                        <Field
-                          name="password"
-                          type="password"
-                          placeholder="Password"
-                          icon="icon-lock"
-                          component={InputField}
-                        />
-                        <Button type="submit" color="success" block>
-                          Create Account
-                        </Button>
-                      </Form>
-                    )}
-                  />
-                </CardBody>
-              </Card>
+                          setErrors(errors);
+                        }
+                      }}
+                      validateOnBlur={false}
+                      validateOnChange={false}
+                      render={({ handleSubmit }) => (
+                        <Form onSubmit={handleSubmit}>
+                          <Field name="firstName" placeholder="First Name *" icon="icon-user" component={InputField} />
+                          <Field name="lastName" placeholder="Last Name *" icon="icon-user" component={InputField} />
+                          <Field name="email" placeholder="Email *" icon="icon-envelope" component={InputField} />
+                          <Field
+                            name="password"
+                            type="password"
+                            placeholder="Password *"
+                            icon="icon-lock"
+                            component={InputField}
+                          />
+                          <Field
+                            name="confirmPassword"
+                            type="password"
+                            placeholder="Password (Confirm) *"
+                            icon="icon-lock"
+                            component={InputField}
+                          />
+                          <Row className="mt-3">
+                            <Col>
+                              <Button type="submit" color="primary" block>
+                                Create Account
+                              </Button>
+                            </Col>
+                          </Row>
+                        </Form>
+                      )}
+                    />
+                    <Row className="mt-4">
+                      <Col className="text-center">
+                        Already have an account?
+                        <br />
+                        <Link href="/user/login">
+                          <Button color="link">Login</Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+              </CardGroup>
             </Col>
           </Row>
         </Container>

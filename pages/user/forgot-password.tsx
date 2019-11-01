@@ -40,7 +40,7 @@ const ForgotPassword: NextPage<Props> = () => {
                       render={({ handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>
                           <Field name="email" placeholder="Email *" icon="icon-envelope" component={InputField} />
-                          <Row>
+                          <Row className="mt-3">
                             <Col>
                               <Button type="submit" color="primary" block>
                                 Send Reset Link

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FieldProps } from 'formik';
-import { Alert, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 interface InputProps {
   props: any;
@@ -12,10 +12,7 @@ export const InputField: FC<FieldProps & InputProps> = ({ field, form: { errors,
 
   return (
     <>
-      <Alert color="danger" isOpen={!!errorMessage} className="text-center">
-        {errorMessage}
-      </Alert>
-      <InputGroup className="mb-3">
+      <InputGroup className="mt-3">
         {icon && (
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
@@ -25,6 +22,7 @@ export const InputField: FC<FieldProps & InputProps> = ({ field, form: { errors,
         )}
         <Input {...field} {...props} />
       </InputGroup>
+      {errorMessage && <div className="text-danger">{errorMessage}</div>}
     </>
   );
 };

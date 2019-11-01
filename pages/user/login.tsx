@@ -28,32 +28,53 @@ const Login: NextPage = () => {
                   <CardBody>
                     <h1 className="text-center">Login</h1>
                     <p className="text-center text-muted">Sign In to your account</p>
+                    {/* <Alert color="danger" isOpen={!!errorMessage} className="text-center">
+                      {errorMessage}
+                    </Alert> */}
                     <Formik
                       initialValues={{
                         email: '',
                         password: '',
                       }}
                       onSubmit={async (data, { setErrors }) => {
-                        const response = await login({
-                          variables: data,
-                          update: (cache, { data: d }) => {
-                            if (!d || !d.login) {
-                              return;
-                            }
-                            cache.writeQuery({
-                              query: MeDocument,
-                              data: { me: d.login },
-                            });
-                          },
-                        });
+                        // if (data.password !== data.confirmPassword) {
+                        //   setShowAlert(true);
+                        //   return;
+                        // }
 
-                        if (response && response.data && !response.data.login) {
-                          setErrors({
-                            email: 'Invalid login',
+                        // setShowAlert(false);
+
+                        try {
+                          await login({
+                            variables: data,
+                            update: (cache, { data: d }) => {
+                              if (!d || !d.login) {
+                                return;
+                              }
+                              cache.writeQuery({
+                                query: MeDocument,
+                                data: { me: d.login },
+                              });
+                            },
                           });
-                          return;
+
+                          // if (response && response.data && !response.data.login) {
+                          //   setErrors({
+                          //     email: 'Invalid login',
+                          //   });
+                          //   return;
+                          // }
+                          Router.push('/');
+                        } catch (err) {
+                          const errors: { [key: string]: string } = {};
+
+                          err.graphQLErrors[0].extensions.exception.validationErrors.map((validationErr: any) => {
+                            Object.values(validationErr.constraints).map((message: any) => {
+                              errors[validationErr.property] = message;
+                            });
+                          });
+                          setErrors(errors);
                         }
-                        Router.push('/');
                       }}
                       validateOnBlur={false}
                       validateOnChange={false}
@@ -73,7 +94,7 @@ const Login: NextPage = () => {
                             icon="icon-lock"
                             component={InputField}
                           />
-                          <Row>
+                          <Row className="mt-3">
                             <Col>
                               <Button type="submit" color="primary" block>
                                 Login
