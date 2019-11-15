@@ -45,7 +45,7 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
       <SidebarToggler className="d-md-down-none" display="lg" />
       <Nav className="d-md-down-none navbar-nav">
         <Nav.Item className="px-3">
-          <Link href="/dashboard">
+          <Link href="/samples/dashboard">
             <a className="nav-link">Dashboard</a>
           </Link>
         </Nav.Item>
@@ -55,7 +55,7 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
           </Link>
         </Nav.Item>
         <Nav.Item className="px-3">
-          <Link href="/forms">
+          <Link href="/samples/forms">
             <a className="nav-link">Forms</a>
           </Link>
         </Nav.Item>

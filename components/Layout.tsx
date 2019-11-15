@@ -5,13 +5,13 @@ import { Container } from 'react-bootstrap';
 import {
   Aside,
   Footer,
+  Breadcrumb,
   Header,
   Sidebar,
   SidebarFooter,
   SidebarForm,
   SidebarHeader,
   // SidebarMinimizer,
-  Breadcrumb,
   SidebarNav,
 } from '../components';
 import navigation from '../_nav';

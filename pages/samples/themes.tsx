@@ -5,10 +5,10 @@ import { Layout } from '../../components';
 
 interface Props {}
 
-const Theme: NextPage<Props> = () => (
+const Themes: NextPage<Props> = () => (
   <Layout title="Theme">
     <div>Theme</div>
   </Layout>
 );
 
-export default Theme;
+export default Themes;

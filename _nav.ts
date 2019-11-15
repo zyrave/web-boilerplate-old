@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/dashboard',
+      url: '/samples/dashboard',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info',
@@ -11,7 +11,7 @@ export default {
     },
     {
       title: true,
-      name: 'Authentication',
+      name: 'Pages',
       wrapper: {
         // optional wrapper object
         element: '', // required valid HTML5 element tag
@@ -31,7 +31,7 @@ export default {
     },
     {
       title: true,
-      name: 'Demo',
+      name: 'Examples',
       wrapper: {
         element: '',
         attributes: {},
@@ -48,163 +48,28 @@ export default {
       icon: 'icon-speedometer',
       children: [
         {
+          name: 'Basic Forms',
+          url: '/samples/forms',
+          icon: 'icon-note',
+        },
+        {
           name: 'Tables',
-          url: '/tables',
+          url: '/samples/tables',
           icon: 'icon-list',
         },
-      ],
-    },
-    {
-      name: 'Themes',
-      url: '/theme',
-      icon: 'icon-drop',
-      children: [
         {
           name: 'Themes',
-          url: '/theme',
+          url: '/samples/themes',
           icon: 'icon-puzzle',
         },
         {
           name: 'Colors',
-          url: '/theme/colors',
+          url: '/samples/colors',
           icon: 'icon-puzzle',
         },
       ],
     },
-    {
-      title: true,
-      name: 'Components',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
-    },
-    {
-      name: 'Forms',
-      url: '/forms',
-      icon: 'icon-note',
-      children: [
-        {
-          name: 'Basic Forms',
-          url: '/forms',
-          icon: 'icon-note',
-        },
-      ],
-    },
-    /*{
-      name: 'Base',
-      url: '/base',
-      icon: 'icon-puzzle',
-      children: [
-        {
-          name: 'Breadcrumbs',
-          url: '/base/breadcrumbs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Cards',
-          url: '/base/cards',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Carousels',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Collapses',
-          url: '/base/collapses',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Dropdowns',
-          url: '/base/dropdowns',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Forms',
-          url: '/base/forms',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Jumbotrons',
-          url: '/base/jumbotrons',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'List groups',
-          url: '/base/list-groups',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Navs',
-          url: '/base/navs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Paginations',
-          url: '/base/paginations',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Popovers',
-          url: '/base/popovers',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Progress Bar',
-          url: '/base/progress-bar',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Switches',
-          url: '/base/switches',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tables',
-          url: '/base/tables',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tabs',
-          url: '/base/tabs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tooltips',
-          url: '/base/tooltips',
-          icon: 'icon-puzzle',
-        },
-      ],
-    },
-    {
-      name: 'Buttons',
-      url: '/buttons',
-      icon: 'icon-cursor',
-      children: [
-        {
-          name: 'Buttons',
-          url: '/buttons/buttons',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Button dropdowns',
-          url: '/buttons/button-dropdowns',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Button groups',
-          url: '/buttons/button-groups',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Brand Buttons',
-          url: '/buttons/brand-buttons',
-          icon: 'icon-cursor',
-        },
-      ],
-    },
+    /*
     {
       name: 'Charts',
       url: '/charts',

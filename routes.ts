@@ -1,12 +1,12 @@
 const routes: Array<any> = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/products', name: 'Products' },
-  { path: '/tables', name: 'Tables' },
-  { path: '/dashboard', name: 'Dashboard' },
-  { path: '/theme', exact: true, name: 'Theme' },
-  { path: '/theme/colors', name: 'Colors' },
-  { path: '/theme/typography', name: 'Typography' },
-  { path: '/forms', exact: true, name: 'Forms' },
+  /** Samples menu **/
+  { path: '/samples/dashboard', exact: true, name: 'Dashboard' },
+  { path: '/samples/forms', exact: true, name: 'Forms' },
+  { path: '/samples/tables', exact: true, name: 'Tables' },
+  { path: '/samples/themes', exact: true, name: 'Theme' },
+  { path: '/samples/colors', exact: true, name: 'Colors' },
 ];
 
 export default routes;

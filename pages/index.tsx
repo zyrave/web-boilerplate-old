@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 
-import Dashboard from './dashboard';
+import Dashboard from './samples/dashboard';
 
 const Index: NextPage = () => <Dashboard />;
 

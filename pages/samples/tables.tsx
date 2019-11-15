@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Layout, Loading, Error } from '../components';
+import { Layout, Loading, Error } from '../../components';
 
 interface Props {
   loading: boolean;
@@ -10,7 +10,7 @@ interface Props {
   data: Array<any>;
 }
 
-const Users: NextPage<Props> = ({ loading = false, error = undefined, data = [] }) => {
+const Tables: NextPage<Props> = ({ loading = false, error = undefined, data = [] }) => {
   if (loading) return <Loading />;
   if (error) return <Error title="Error" content={error} />;
 
@@ -120,7 +120,7 @@ const Users: NextPage<Props> = ({ loading = false, error = undefined, data = [] 
   );
 };
 
-Users.getInitialProps = async () => {
+Tables.getInitialProps = async () => {
   const data = [
     {
       id: 1,
@@ -360,4 +360,4 @@ Users.getInitialProps = async () => {
   return { loading, error, data };
 };
 
-export default Users;
+export default Tables;

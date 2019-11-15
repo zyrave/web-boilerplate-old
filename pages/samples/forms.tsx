@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { Form, Card, Row, Col, Button, Alert, InputGroup } from 'react-bootstrap';
 
-import { Layout } from '../components';
+import { Layout } from '../../components';
 
 const schema = yup.object({
   firstName: yup.string().required(),

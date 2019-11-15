@@ -35,8 +35,13 @@ const Breadcrumbs: FC<any> = (router, routes) => {
 
   const items = paths.map((path: string, i: any) => {
     const index = routes.findIndex((r: any) => r.path === path);
-    const routeName = routes[index].name;
-    return <BreadcrumbsItem key={i} path={path} routeName={routeName} pathName={router.pathname} />;
+
+    if (index > -1) {
+      const routeName = routes[index].name;
+      return <BreadcrumbsItem key={i} path={path} routeName={routeName} pathName={router.pathname} />;
+    }
+
+    return null;
   });
 
   return <RbBreadcrumb>{items}</RbBreadcrumb>;
