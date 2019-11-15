@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 
 import { useMeQuery } from '../generated/graphql';
-import Login from '../pages/user/login';
+import Login from '../pages/users/login';
 
 interface Props {
   children?: ReactNode;

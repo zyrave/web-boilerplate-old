@@ -20,7 +20,7 @@ const Logout: NextPageWithApolloClient<Props> = ({ apolloClient, ...ctx }) => {
       try {
         await logout();
         await apolloClient.resetStore();
-        redirect(ctx, '/user/login');
+        redirect(ctx, '/users/login');
       } catch (err) {
         console.log(err);
         return;

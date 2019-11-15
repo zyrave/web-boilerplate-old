@@ -105,7 +105,7 @@ const Login: NextPage = () => {
                   />
                   <Row className="mb-3">
                     <Col className="mt-2 text-center">
-                      <Link href="/user/forgot-password">
+                      <Link href="/users/forgot-password">
                         <a>Forgot password?</a>
                       </Link>
                     </Col>
@@ -115,7 +115,7 @@ const Login: NextPage = () => {
                       Don't have an account?
                       <Row>
                         <Col className="mt-1 text-center">
-                          <Link href="/user/register">
+                          <Link href="/users/register">
                             <a>Create an account</a>
                           </Link>
                         </Col>

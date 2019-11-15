@@ -58,7 +58,7 @@ export default (App: any) =>
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
           console.error('Error while running `getDataFromTree`', error);
           if (error.message.includes('Access denied! You need to be authorized to perform this action!')) {
-            redirect(ctx.ctx, '/user/login');
+            redirect(ctx.ctx, '/users/login');
           }
         }
 

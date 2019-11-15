@@ -21,12 +21,12 @@ export default {
     },
     {
       name: 'Register',
-      url: '/user/register',
+      url: '/users/register',
       icon: 'icon-drop',
     },
     {
       name: 'Login',
-      url: '/user/login',
+      url: '/users/login',
       icon: 'icon-pencil',
     },
     {

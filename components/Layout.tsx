@@ -35,7 +35,7 @@ const Layout: FC<Props> = ({ children, title }, ...ctx) => {
       const response = await logout();
 
       if (response.data) {
-        redirect(ctx, '/user/login');
+        redirect(ctx, '/users/login');
       }
     } catch (err) {
       console.log(err);

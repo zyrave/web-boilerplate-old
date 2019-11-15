@@ -52,7 +52,7 @@ const Register: NextPage<Props> = () => {
 
                       try {
                         await register({ variables: { data } });
-                        Router.push('/user/check-email');
+                        Router.push('/users/check-email');
                       } catch (err) {
                         const errors: { [key: string]: string } = {};
 
@@ -100,7 +100,7 @@ const Register: NextPage<Props> = () => {
                       Already have an account?
                       <Row>
                         <Col className="mt-1 text-center">
-                          <Link href="/user/login">
+                          <Link href="/users/login">
                             <a>Login</a>
                           </Link>
                         </Col>

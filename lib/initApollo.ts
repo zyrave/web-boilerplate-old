@@ -31,7 +31,7 @@ function create(initialState: any, { getToken }: Options) {
         console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
 
         if (isBrowser && message.includes('Access denied! You need to be authorized to perform this action!')) {
-          Router.replace('/user/login');
+          Router.replace('/users/login');
         }
       });
     if (networkError) console.log(`[Network error]: ${networkError}`);

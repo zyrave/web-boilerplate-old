@@ -34,7 +34,7 @@ const ForgotPassword: NextPage<Props> = () => {
                     }}
                     onSubmit={async data => {
                       await forgotPassword({ variables: data });
-                      Router.push('/user/check-email');
+                      Router.push('/users/check-email');
                     }}
                     render={({ handleSubmit }) => (
                       <Form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ const ForgotPassword: NextPage<Props> = () => {
                   />
                   <Row>
                     <Col className="mt-2 text-center">
-                      <Link href="/user/login">
+                      <Link href="/users/login">
                         <a>Go back to login</a>
                       </Link>
                     </Col>
