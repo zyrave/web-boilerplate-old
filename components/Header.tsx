@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Nav, Badge, Dropdown } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import { AsideToggler, SidebarToggler } from '../components';
+import { AsideToggler, NavbarBrand, SidebarToggler } from '../components';
 
 interface Props {
   className?: string;
@@ -26,22 +26,20 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
   return (
     <header className={classes} {...attributes}>
       <SidebarToggler className="d-lg-none" display="md" mobile />
-      <a className="navbar-brand">
-        <img
-          src="/static/images/brand/logo.svg"
-          width="89"
-          height="25"
-          alt="CoreUI Logo"
-          className="navbar-brand-full"
-        />
-        <img
-          src="/static/images/brand/sygnet.svg"
-          width="30"
-          height="30"
-          alt="CoreUI Logo"
-          className="navbar-brand-minimized"
-        />
-      </a>
+      <NavbarBrand
+        full={{
+          src: '/static/images/brand/logo.svg',
+          width: 89,
+          height: 25,
+          alt: 'CoreUI Logo',
+        }}
+        minimized={{
+          src: '/static/images/brand/sygnet.svg',
+          width: 30,
+          height: 30,
+          alt: 'CoreUI Logo',
+        }}
+      />
       <SidebarToggler className="d-md-down-none" display="lg" />
       <Nav className="d-md-down-none navbar-nav">
         <Nav.Item className="px-3">
