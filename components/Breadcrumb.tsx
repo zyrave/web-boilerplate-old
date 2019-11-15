@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Link from 'next/link';
 import { withRouter, NextRouter } from 'next/router';
 import { WithRouterProps } from 'next/dist/client/with-router';
-import { Breadcrumb as RsBreadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Breadcrumb as RbBreadcrumb, BreadcrumbItem } from 'react-bootstrap';
 import classNames from 'classnames';
 
 const getPaths = (pathname: string) => {
@@ -39,7 +39,7 @@ const Breadcrumbs: FC<any> = (router, routes) => {
     return <BreadcrumbsItem key={i} path={path} routeName={routeName} pathName={router.pathname} />;
   });
 
-  return <RsBreadcrumb>{items}</RsBreadcrumb>;
+  return <RbBreadcrumb>{items}</RbBreadcrumb>;
 };
 
 interface Props {

@@ -1,20 +1,20 @@
 // Fonts
-@import './shared/fonts';
+@import "./shared/fonts";
 
 // If you want to override variables do it here
-@import './shared/variables';
+@import "./shared/variables";
 
 // Import styles
-@import '~@coreui/coreui/scss/coreui.scss';
+@import "~@coreui/coreui/scss/coreui.scss";
 
 // Temp fix for reactstrap
-@import '~@coreui/coreui/scss/_dropdown-menu-right.scss';
+@import "~@coreui/coreui/scss/_dropdown-menu-right.scss";
 
 // If you want to add something do it here
-@import './shared/custom';
+@import "./shared/custom";
 
 // ie fixes
-@import './shared/ie-fix';
+@import "./shared/ie-fix";
 
 .pointer {
   cursor: pointer;
@@ -26,4 +26,9 @@
   -moz-transition-property: none !important;
   -o-transition-property: none !important;
   transition-property: none !important;
+}
+
+.table th,
+.table td {
+  vertical-align: middle !important;
 }

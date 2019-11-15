@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import { Container } from 'reactstrap';
+import { Container } from 'react-bootstrap';
 
 import {
   Aside,
@@ -19,11 +18,7 @@ import navigation from '../_nav';
 import routes from '../routes';
 import { useLogoutMutation } from '../generated/graphql';
 import redirect from '../lib/redirect';
-import Validation from './Validation';
-
-const DefaultAside = dynamic(() => import('./views/DefaultAside'));
-const DefaultFooter = dynamic(() => import('./views/DefaultFooter'));
-const DefaultHeader = dynamic(() => import('./views/DefaultHeader'));
+import Validator from './Validator';
 
 interface Props {
   children?: ReactNode;
@@ -49,14 +44,14 @@ const Layout: FC<Props> = ({ children, title }, ...ctx) => {
   };
 
   return (
-    <Validation>
+    <Validator>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className="app">
-        <Header fixed>{<DefaultHeader onLogout={e => handleLogout(e)} />}</Header>
+        <Header fixed onLogout={e => handleLogout(e)} />
         <div className="app-body">
           <Sidebar fixed display="lg">
             <SidebarHeader />
@@ -69,15 +64,11 @@ const Layout: FC<Props> = ({ children, title }, ...ctx) => {
             <Breadcrumb appRoutes={routes} />
             <Container fluid>{children}</Container>
           </main>
-          <Aside fixed>
-            <DefaultAside />
-          </Aside>
+          <Aside fixed />
         </div>
-        <Footer>
-          <DefaultFooter />
-        </Footer>
+        <Footer />
       </div>
-    </Validation>
+    </Validator>
   );
 };
 

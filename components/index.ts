@@ -15,7 +15,7 @@ import SidebarMinimizer from './SidebarMinimizer';
 import SidebarNav from './SidebarNav';
 import SidebarToggler from './SidebarToggler';
 import Switch from './Switch';
-import Validation from './Validation';
+import Validator from './Validator';
 
 export {
   Aside,
@@ -35,5 +35,5 @@ export {
   SidebarNav,
   SidebarToggler,
   Switch,
-  Validation,
+  Validator,
 };

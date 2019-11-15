@@ -3,7 +3,7 @@ import NextApp from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import withApollo from '../lib/withApollo';
-import NavContext from '../components/NavContext';
+import NavContext from '../lib/NavContext';
 import '../styles/style.scss';
 
 interface State {

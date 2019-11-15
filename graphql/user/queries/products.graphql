@@ -1,0 +1,14 @@
+query GetProducts {
+  getProducts {
+    id
+    name
+    category
+    price
+    quantity
+    imagePath
+    isActive
+    createdAt
+    updatedAt
+    createdBy
+  }
+}

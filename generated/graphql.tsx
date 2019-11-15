@@ -9,6 +9,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+  DateTime: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
@@ -18,8 +20,20 @@ export type ChangePasswordInput = {
   token: Scalars['String'];
 };
 
+export type CreateProductInput = {
+  name: Scalars['String'];
+  category: Scalars['String'];
+  price: Scalars['Float'];
+  quantity: Scalars['Float'];
+  imagePath?: Maybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createProduct: Product;
+  updateProduct: Product;
+  deleteProduct: Product;
   changePassword?: Maybe<User>;
   confirmUser: Scalars['Boolean'];
   forgotPassword: Scalars['Boolean'];
@@ -27,6 +41,18 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   addProfilePicture: Scalars['Boolean'];
   register: User;
+};
+
+export type MutationCreateProductArgs = {
+  data: CreateProductInput;
+};
+
+export type MutationUpdateProductArgs = {
+  data: UpdateProductInput;
+};
+
+export type MutationDeleteProductArgs = {
+  id: Scalars['Float'];
 };
 
 export type MutationChangePasswordArgs = {
@@ -54,10 +80,40 @@ export type MutationRegisterArgs = {
   data: RegisterInput;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  category: Scalars['String'];
+  price: Scalars['Float'];
+  quantity: Scalars['Float'];
+  imagePath?: Maybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  createdBy: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  getProducts: Array<Product>;
+  getProductById?: Maybe<Product>;
+  getProductByName: Array<Product>;
+  getProductsWithStatusActive: Array<Product>;
   me?: Maybe<User>;
-  hello: Scalars['String'];
+  register: Scalars['String'];
+};
+
+export type QueryGetProductByIdArgs = {
+  id: Scalars['Float'];
+};
+
+export type QueryGetProductByNameArgs = {
+  name: Scalars['String'];
+};
+
+export type QueryRegisterArgs = {
+  data: RegisterInput;
 };
 
 export type RegisterInput = {
@@ -65,6 +121,16 @@ export type RegisterInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   email: Scalars['String'];
+};
+
+export type UpdateProductInput = {
+  id: Scalars['Float'];
+  name: Scalars['String'];
+  category: Scalars['String'];
+  price: Scalars['Float'];
+  quantity: Scalars['Float'];
+  imagePath?: Maybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
 };
 
 export type User = {
@@ -117,14 +183,30 @@ export type RegisterMutation = { __typename?: 'Mutation' } & {
   register: { __typename?: 'User' } & Pick<User, 'id' | 'firstName' | 'lastName' | 'email' | 'name'>;
 };
 
-export type HelloQueryVariables = {};
-
-export type HelloQuery = { __typename?: 'Query' } & Pick<Query, 'hello'>;
-
 export type MeQueryVariables = {};
 
 export type MeQuery = { __typename?: 'Query' } & {
   me: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'firstName' | 'lastName' | 'email' | 'name'>>;
+};
+
+export type GetProductsQueryVariables = {};
+
+export type GetProductsQuery = { __typename?: 'Query' } & {
+  getProducts: Array<
+    { __typename?: 'Product' } & Pick<
+      Product,
+      | 'id'
+      | 'name'
+      | 'category'
+      | 'price'
+      | 'quantity'
+      | 'imagePath'
+      | 'isActive'
+      | 'createdAt'
+      | 'updatedAt'
+      | 'createdBy'
+    >
+  >;
 };
 
 export const ChangePasswordDocument = gql`
@@ -367,38 +449,6 @@ export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<
   RegisterMutation,
   RegisterMutationVariables
 >;
-export const HelloDocument = gql`
-  query Hello {
-    hello
-  }
-`;
-
-/**
- * __useHelloQuery__
- *
- * To run a query within a React component, call `useHelloQuery` and pass it any options that fit your needs.
- * When your component renders, `useHelloQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useHelloQuery({
- *   variables: {
- *   },
- * });
- */
-export function useHelloQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<HelloQuery, HelloQueryVariables>) {
-  return ApolloReactHooks.useQuery<HelloQuery, HelloQueryVariables>(HelloDocument, baseOptions);
-}
-export function useHelloLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<HelloQuery, HelloQueryVariables>,
-) {
-  return ApolloReactHooks.useLazyQuery<HelloQuery, HelloQueryVariables>(HelloDocument, baseOptions);
-}
-export type HelloQueryHookResult = ReturnType<typeof useHelloQuery>;
-export type HelloLazyQueryHookResult = ReturnType<typeof useHelloLazyQuery>;
-export type HelloQueryResult = ApolloReactCommon.QueryResult<HelloQuery, HelloQueryVariables>;
 export const MeDocument = gql`
   query Me {
     me {
@@ -435,3 +485,48 @@ export function useMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptio
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = ApolloReactCommon.QueryResult<MeQuery, MeQueryVariables>;
+export const GetProductsDocument = gql`
+  query GetProducts {
+    getProducts {
+      id
+      name
+      category
+      price
+      quantity
+      imagePath
+      isActive
+      createdAt
+      updatedAt
+      createdBy
+    }
+  }
+`;
+
+/**
+ * __useGetProductsQuery__
+ *
+ * To run a query within a React component, call `useGetProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetProductsQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductsQuery, GetProductsQueryVariables>,
+) {
+  return ApolloReactHooks.useQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, baseOptions);
+}
+export function useGetProductsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductsQuery, GetProductsQueryVariables>,
+) {
+  return ApolloReactHooks.useLazyQuery<GetProductsQuery, GetProductsQueryVariables>(GetProductsDocument, baseOptions);
+}
+export type GetProductsQueryHookResult = ReturnType<typeof useGetProductsQuery>;
+export type GetProductsLazyQueryHookResult = ReturnType<typeof useGetProductsLazyQuery>;
+export type GetProductsQueryResult = ApolloReactCommon.QueryResult<GetProductsQuery, GetProductsQueryVariables>;

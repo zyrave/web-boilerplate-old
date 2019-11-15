@@ -1,6 +1,6 @@
 const routes: Array<any> = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/hello', name: 'Hello' },
+  { path: '/products', name: 'Products' },
   { path: '/tables', name: 'Tables' },
   { path: '/dashboard', name: 'Dashboard' },
   { path: '/theme', exact: true, name: 'Theme' },

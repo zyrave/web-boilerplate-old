@@ -1,13 +1,13 @@
 import React, { useContext, ReactNode, FC } from 'react';
 import Link from 'next/link';
 import { WithRouterProps } from 'next/dist/client/with-router';
-import { Badge, Nav, NavItem, NavLink as RsNavLink } from 'reactstrap';
+import { Badge, Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { withRouter } from 'next/router';
 
-import NavContext from './NavContext';
+import NavContext from '../lib/NavContext';
 
 interface Props {
   children?: ReactNode;
@@ -75,7 +75,7 @@ const SidebarNav: FC<Props> = ({
     if (badge) {
       const classes = classNames(badge.class, badge.className);
       return (
-        <Badge className={classes} color={badge.variant}>
+        <Badge className={classes} variant={badge.variant}>
           {badge.text}
         </Badge>
       );
@@ -107,33 +107,33 @@ const SidebarNav: FC<Props> = ({
     const itemAttr = getAttribs(item.itemAttr);
     classes.item = classNames(classes.item, itemAttr.class, itemAttr.className);
     return (
-      <NavItem key={key} className={classes.item} {...itemAttr}>
+      <Nav.Item key={key} as="li" className={classes.item} {...itemAttr}>
         {attr.disabled ? (
-          <Link href={''}>
-            <RsNavLink className={classes.link} {...attr}>
+          <Link href={''} passHref>
+            <Nav.Link className={classes.link} {...attr}>
               {itemIcon}
               {item.name}
               {itemBadge}
-            </RsNavLink>
+            </Nav.Link>
           </Link>
         ) : isExternal(url, props) ? (
-          <Link href={url}>
-            <RsNavLink className={classes.link} active {...attr}>
+          <Link href={url} passHref>
+            <Nav.Link className={classes.link} active {...attr}>
               {itemIcon}
               {item.name}
               {itemBadge}
-            </RsNavLink>
+            </Nav.Link>
           </Link>
         ) : (
-          <Link href={url}>
-            <RsNavLink className={classes.link} onClick={hideMobile} {...attr}>
+          <Link href={url} passHref>
+            <Nav.Link className={classes.link} onClick={hideMobile} {...attr}>
               {itemIcon}
               {item.name}
               {itemBadge}
-            </RsNavLink>
+            </Nav.Link>
           </Link>
         )}
-      </NavItem>
+      </Nav.Item>
     );
   };
 

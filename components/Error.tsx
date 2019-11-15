@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import { Row, Col } from 'reactstrap';
+import { Row, Col } from 'react-bootstrap';
 
 interface Props {
   title: string;

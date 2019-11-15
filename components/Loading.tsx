@@ -1,13 +1,13 @@
 import React from 'react';
-import { Row, Col, Progress } from 'reactstrap';
+import { Row, Col, ProgressBar } from 'react-bootstrap';
 
 const Loading = () => (
   <Row>
-    <Col md={{ size: 6, offset: 3 }}>
+    <Col md={{ span: 6, offset: 3 }}>
       <div className="page-is-loading">
-        <Progress bar animated value="100">
+        <ProgressBar animated now={100}>
           Loading
-        </Progress>
+        </ProgressBar>
       </div>
     </Col>
   </Row>

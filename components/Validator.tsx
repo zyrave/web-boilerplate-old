@@ -7,7 +7,7 @@ interface Props {
   children?: ReactNode;
 }
 
-const Validation: FC<Props> = ({ children }) => {
+const Validator: FC<Props> = ({ children }) => {
   const { loading, data } = useMeQuery();
 
   if (loading) return <p>Loading...</p>;
@@ -16,4 +16,4 @@ const Validation: FC<Props> = ({ children }) => {
   return <>{children}</>;
 };
 
-export default Validation;
+export default Validator;

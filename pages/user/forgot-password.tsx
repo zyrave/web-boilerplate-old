@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import Link from 'next/link';
 import { Formik, Field } from 'formik';
-import { Button, Card, CardBody, CardGroup, Col, Container, Form, Row } from 'reactstrap';
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 
 import { InputField } from '../../components/fields/InputField';
 import { useForgotPasswordMutation } from '../../generated/graphql';
@@ -25,41 +25,39 @@ const ForgotPassword: NextPage<Props> = () => {
         <Container>
           <Row className="justify-content-center">
             <Col md="4">
-              <CardGroup>
-                <Card className="p-4">
-                  <CardBody>
-                    <h3 className="text-center mb-4">Recover Your Password</h3>
-                    <Formik
-                      initialValues={{
-                        email: '',
-                      }}
-                      onSubmit={async data => {
-                        await forgotPassword({ variables: data });
-                        Router.push('/user/check-email');
-                      }}
-                      render={({ handleSubmit }) => (
-                        <Form onSubmit={handleSubmit}>
-                          <Field name="email" placeholder="Email *" icon="icon-envelope" component={InputField} />
-                          <Row className="mt-3">
-                            <Col>
-                              <Button type="submit" color="primary" block>
-                                Send Reset Link
-                              </Button>
-                            </Col>
-                          </Row>
-                        </Form>
-                      )}
-                    />
-                    <Row>
-                      <Col className="text-center">
-                        <Link href="/user/login">
-                          <Button color="link">Go back to login</Button>
-                        </Link>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
-              </CardGroup>
+              <Card className="p-4">
+                <Card.Body>
+                  <h3 className="text-center mb-4">Recover Your Password</h3>
+                  <Formik
+                    initialValues={{
+                      email: '',
+                    }}
+                    onSubmit={async data => {
+                      await forgotPassword({ variables: data });
+                      Router.push('/user/check-email');
+                    }}
+                    render={({ handleSubmit }) => (
+                      <Form onSubmit={handleSubmit}>
+                        <Field name="email" placeholder="Email *" icon="icon-envelope" component={InputField} />
+                        <Row className="mt-3">
+                          <Col>
+                            <Button type="submit" color="primary" block>
+                              Send Reset Link
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Form>
+                    )}
+                  />
+                  <Row>
+                    <Col className="mt-2 text-center">
+                      <Link href="/user/login">
+                        <a>Go back to login</a>
+                      </Link>
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
         </Container>

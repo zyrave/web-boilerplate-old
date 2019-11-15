@@ -21,13 +21,11 @@ export default {
     },
     {
       name: 'Register',
-      // url: '/theme/colors',
       url: '/user/register',
       icon: 'icon-drop',
     },
     {
       name: 'Login',
-      // url: '/theme/typography',
       url: '/user/login',
       icon: 'icon-pencil',
     },
@@ -38,6 +36,11 @@ export default {
         element: '',
         attributes: {},
       },
+    },
+    {
+      name: 'Products',
+      url: '/products',
+      icon: 'icon-list',
     },
     {
       name: 'Samples',

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FieldProps } from 'formik';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, FormControl } from 'react-bootstrap';
 
 interface InputProps {
   props: any;
@@ -14,13 +14,13 @@ export const InputField: FC<FieldProps & InputProps> = ({ field, form: { errors,
     <>
       <InputGroup className="mt-3">
         {icon && (
-          <InputGroupAddon addonType="prepend">
-            <InputGroupText>
+          <InputGroup.Prepend>
+            <InputGroup.Text>
               <i className={icon} />
-            </InputGroupText>
-          </InputGroupAddon>
+            </InputGroup.Text>
+          </InputGroup.Prepend>
         )}
-        <Input {...field} {...props} />
+        <FormControl {...field} {...props} />
       </InputGroup>
       {errorMessage && <div className="text-danger">{errorMessage}</div>}
     </>

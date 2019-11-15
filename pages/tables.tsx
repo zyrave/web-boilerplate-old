@@ -1,6 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
-import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import { Layout, Loading, Error } from '../components';
 
@@ -20,11 +20,11 @@ const Users: NextPage<Props> = ({ loading = false, error = undefined, data = [] 
         <Row>
           <Col xs="12">
             <Card>
-              <CardHeader>
+              <Card.Header>
                 <i className="fa fa-align-justify" />
                 <strong>Users</strong>
-              </CardHeader>
-              <CardBody>
+              </Card.Header>
+              <Card.Body>
                 <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4 pull-right">
                   <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm">
                     <input
@@ -75,8 +75,8 @@ const Users: NextPage<Props> = ({ loading = false, error = undefined, data = [] 
                     </tbody>
                   </table>
                 </div>
-                <nav className="" aria-label="pagination">
-                  <ul className="pagination pull-right">
+                <nav className="float-right" aria-label="pagination">
+                  <ul className="pagination">
                     <li className="page-item">
                       <button type="button" className="page-link" aria-label="Previous">
                         <span aria-hidden="true">Prev</span>
@@ -111,7 +111,7 @@ const Users: NextPage<Props> = ({ loading = false, error = undefined, data = [] 
                     </li>
                   </ul>
                 </nav>
-              </CardBody>
+              </Card.Body>
             </Card>
           </Col>
         </Row>
