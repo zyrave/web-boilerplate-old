@@ -112,18 +112,20 @@ const Products: NextPage<Props> = () => {
                     </button>
                   </div>
                 </div>
-                <BootstrapTable
-                  bootstrap4
-                  keyField="id"
-                  data={data && data.getProducts}
-                  columns={columns}
-                  rowStyle={{ verticalAlign: 'middle' }}
-                  defaultSorted={defaultSorted}
-                  bordered={false}
-                  // striped
-                  hover
-                  // condensed
-                />
+                <div className="table-responsive">
+                  <BootstrapTable
+                    bootstrap4
+                    keyField="id"
+                    data={data && data.getProducts}
+                    columns={columns}
+                    rowStyle={{ verticalAlign: 'middle' }}
+                    defaultSorted={defaultSorted}
+                    bordered={false}
+                    // striped
+                    hover
+                    // condensed
+                  />
+                </div>
               </Card.Body>
             </Card>
           </Col>
