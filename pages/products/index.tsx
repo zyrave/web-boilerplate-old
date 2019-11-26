@@ -2,6 +2,11 @@ import React from 'react';
 import { NextPage } from 'next';
 import { Card, Col, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory, {
+  PaginationProvider,
+  PaginationListStandalone,
+  SizePerPageDropdownStandalone,
+} from 'react-bootstrap-table2-paginator';
 
 import { Layout, Loading } from '../../components';
 import { useGetProductsQuery } from '../../generated/graphql';
@@ -86,50 +91,73 @@ const Products: NextPage<Props> = () => {
   return (
     <Layout title="Products">
       <div className="animated fadeIn">
-        <Row>
-          <Col xs="12">
-            <Card>
-              <Card.Header>
-                <i className="fa fa-align-justify" />
-                <strong>Products</strong>
-              </Card.Header>
-              <Card.Body>
-                <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4 pull-right">
-                  <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Search"
-                      value=""
-                      onChange={() => null}
-                      style={{ height: '35px' }}
-                    />
-                    <button
-                      className="btn btn-default btn-secondary react-bs-table-search-clear-btn ml-2"
-                      type="button"
-                    >
-                      Clear
-                    </button>
-                  </div>
-                </div>
-                <div className="table-responsive">
-                  <BootstrapTable
-                    bootstrap4
-                    keyField="id"
-                    data={data && data.getProducts}
-                    columns={columns}
-                    rowStyle={{ verticalAlign: 'middle' }}
-                    defaultSorted={defaultSorted}
-                    bordered={false}
-                    // striped
-                    hover
-                    // condensed
-                  />
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+        <PaginationProvider
+          pagination={paginationFactory({
+            custom: true,
+            page: 1,
+            sizePerPage: 10,
+            // ...options,
+            totalSize: data && data.getProducts.length,
+          })}
+        >
+          {({ paginationProps, paginationTableProps }: any) => (
+            <>
+              <Row>
+                <Col xs="12">
+                  <Card>
+                    <Card.Header>
+                      <i className="fa fa-align-justify" />
+                      <strong>Products</strong>
+                    </Card.Header>
+                    <Card.Body>
+                      <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 m-auto">
+                        <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm">
+                          <input
+                            className="form-control"
+                            type="text"
+                            placeholder="Search"
+                            value=""
+                            onChange={() => null}
+                            style={{ height: '35px' }}
+                          />
+                          <button
+                            className="btn btn-default btn-secondary react-bs-table-search-clear-btn ml-2"
+                            type="button"
+                            style={{ width: '75px' }}
+                          >
+                            Clear
+                          </button>
+                        </div>
+                      </div>
+                      <div className="d-flex d-flex-column">
+                        <SizePerPageDropdownStandalone {...paginationProps} />
+                        <div className="ml-auto">
+                          <PaginationListStandalone {...paginationProps} />
+                        </div>
+                      </div>
+                      <div className="table-responsive">
+                        <BootstrapTable
+                          bootstrap4
+                          keyField="id"
+                          data={data && data.getProducts}
+                          columns={columns}
+                          rowStyle={{ verticalAlign: 'middle' }}
+                          defaultSorted={defaultSorted}
+                          bordered={false}
+                          // striped
+                          hover
+                          // condensed
+                          {...paginationTableProps}
+                        />
+                        <hr />
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </>
+          )}
+        </PaginationProvider>
       </div>
     </Layout>
   );

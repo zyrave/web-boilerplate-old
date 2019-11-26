@@ -408,7 +408,10 @@ declare module 'react-bootstrap-table2-filter' {
 }
 
 declare module 'react-bootstrap-table2-paginator' {
-  export default function paginationFactory(options?: PaginationProps): Pagination;
+  export default function paginationFactory(options?: /*PaginationProps*/ TODO): Pagination;
+  function PaginationProvider(props?: TODO): TODO;
+  function PaginationListStandalone(props?: TODO): TODO;
+  function SizePerPageDropdownStandalone(props?: TODO): TODO;
 }
 
 declare module 'react-bootstrap-table2-editor' {

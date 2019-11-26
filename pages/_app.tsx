@@ -4,6 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import withApollo from '../lib/withApollo';
 import NavContext from '../lib/NavContext';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import '../styles/style.scss';
 
 interface State {
