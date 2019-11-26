@@ -13,7 +13,15 @@ import { useGetProductsQuery } from '../../generated/graphql';
 
 const imageFormatter = (cell: any) => <img src={cell} alt="" style={{ width: 50 }} />;
 const priceFormatter = (cell: any) => <span>${cell}</span>;
-const isActiveFormatter = (cell: any) => <span>{cell}</span>;
+const isActiveFormatter = (cell: any) => (
+  <span>
+    {cell ? (
+      <i className="fa fa-check-circle text-primary" style={{ fontSize: '1.2rem' }} />
+    ) : (
+      <i className="fa fa-times-circle text-danger" style={{ fontSize: '1.2rem' }} />
+    )}
+  </span>
+);
 
 const columns = [
   {
