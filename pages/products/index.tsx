@@ -110,8 +110,11 @@ const Products: NextPage<Props> = () => {
                       <strong>Products</strong>
                     </Card.Header>
                     <Card.Body>
-                      <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6 m-auto">
-                        <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm">
+                      <div className="d-flex d-column justify-content-between">
+                        <div className="">
+                          <SizePerPageDropdownStandalone {...paginationProps} />
+                        </div>
+                        <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm w-50">
                           <input
                             className="form-control"
                             type="text"
@@ -128,10 +131,7 @@ const Products: NextPage<Props> = () => {
                             Clear
                           </button>
                         </div>
-                      </div>
-                      <div className="d-flex d-flex-column">
-                        <SizePerPageDropdownStandalone {...paginationProps} />
-                        <div className="ml-auto">
+                        <div>
                           <PaginationListStandalone {...paginationProps} />
                         </div>
                       </div>
