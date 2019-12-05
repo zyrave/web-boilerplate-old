@@ -92,44 +92,44 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
               <strong>Account</strong>
             </Dropdown.Header>
             <Dropdown.Item>
-              <i className="fa fa-bell-o" /> Updates
+              <i className="fas fa-bell-o" /> Updates
               <Badge variant="info">42</Badge>
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fa fa-envelope-o" /> Messages
+              <i className="fas fa-envelope-o" /> Messages
               <Badge variant="success">42</Badge>
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fa fa-tasks" /> Tasks
+              <i className="fas fa-tasks" /> Tasks
               <Badge variant="danger">42</Badge>
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fa fa-comments" /> Comments
+              <i className="fas fa-comments" /> Comments
               <Badge variant="warning">42</Badge>
             </Dropdown.Item>
             <Dropdown.Header as="div" className="text-center">
               <strong>Settings</strong>
             </Dropdown.Header>
             <Dropdown.Item>
-              <i className="fa fa-user" /> Profile
+              <i className="fas fa-user" /> Profile
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fa fa-wrench" /> Settings
+              <i className="fas fa-wrench" /> Settings
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fa fa-usd" /> Payments
+              <i className="fas fa-usd" /> Payments
               <Badge variant="secondary">42</Badge>
             </Dropdown.Item>
             <Dropdown.Item>
-              <i className="fa fa-file" /> Projects
+              <i className="fas fa-file" /> Projects
               <Badge variant="primary">42</Badge>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item>
-              <i className="fa fa-shield" /> Lock Account
+              <i className="fas fa-shield" /> Lock Account
             </Dropdown.Item>
             <Dropdown.Item onClick={(e: React.MouseEvent<any, MouseEvent>) => onLogout(e)}>
-              <i className="fa fa-lock" /> Logout
+              <i className="fas fa-lock" /> Logout
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

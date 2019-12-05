@@ -143,7 +143,7 @@ const SidebarNav: FC<Props> = ({
       link: classNames('nav-label', item.class ? item.class : ''),
       icon: classNames(
         'nav-icon',
-        !item.icon ? 'fa fa-circle' : item.icon,
+        !item.icon ? 'fas fa-circle' : item.icon,
         item.label.variant ? `text-${item.label.variant}` : '',
         item.label.class ? item.label.class : '',
       ),

@@ -21,7 +21,7 @@ const Tables: NextPage<Props> = ({ loading = false, error = undefined, data = []
           <Col xs="12">
             <Card>
               <Card.Header>
-                <i className="fa fa-align-justify" />
+                <i className="fas fa-align-justify" />
                 <strong>Users</strong>
               </Card.Header>
               <Card.Body>

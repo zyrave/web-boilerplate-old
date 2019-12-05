@@ -16,9 +16,9 @@ const priceFormatter = (cell: any) => <span>${cell}</span>;
 const isActiveFormatter = (cell: any) => (
   <span>
     {cell ? (
-      <i className="fa fa-check-circle text-primary" style={{ fontSize: '1.2rem' }} />
+      <i className="fas fa-check-circle text-primary" style={{ fontSize: '1.2rem' }} />
     ) : (
-      <i className="fa fa-times-circle text-danger" style={{ fontSize: '1.2rem' }} />
+      <i className="fas fa-times-circle text-danger" style={{ fontSize: '1.2rem' }} />
     )}
   </span>
 );
@@ -114,7 +114,7 @@ const Products: NextPage<Props> = () => {
                 <Col xs="12">
                   <Card>
                     <Card.Header>
-                      <i className="fa fa-align-justify" />
+                      <i className="fas fa-align-justify" />
                       <strong>Products</strong>
                     </Card.Header>
                     <Card.Body>
