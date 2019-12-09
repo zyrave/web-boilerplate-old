@@ -1,6 +1,7 @@
 import React from 'react';
 import NextApp from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
+import NProgress from 'next-nprogress/component';
 
 import withApollo from '../lib/withApollo';
 import NavContext from '../lib/NavContext';
@@ -25,7 +26,13 @@ class App extends NextApp<any, State> {
 
     return (
       <ApolloProvider client={apolloClient}>
-        <NavContext.Provider value={{ openDropdownMenu: this.state.openDropdownMenu, onClick: this.handleClick }}>
+        <NavContext.Provider
+          value={{
+            openDropdownMenu: this.state.openDropdownMenu,
+            onClick: this.handleClick,
+          }}
+        >
+          <NProgress color="#20a8d8" />
           <Component {...pageProps} />
         </NavContext.Provider>
       </ApolloProvider>

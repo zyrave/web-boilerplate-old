@@ -120,7 +120,7 @@ const Products: NextPage<Props> = () => {
                     <Card.Body>
                       <div className="d-flex d-column justify-content-between">
                         <div className="">
-                          <SizePerPageDropdownStandalone {...paginationProps} />
+                          Show <SizePerPageDropdownStandalone className="mx-2 bg-light" {...paginationProps} /> entries
                         </div>
                         <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm w-50">
                           <input
@@ -136,7 +136,7 @@ const Products: NextPage<Props> = () => {
                             type="button"
                             style={{ width: '75px' }}
                           >
-                            Clear
+                            Search
                           </button>
                         </div>
                         <div>

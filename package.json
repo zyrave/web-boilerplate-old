@@ -41,6 +41,7 @@
     "graphql-tag": "^2.10.1",
     "isomorphic-unfetch": "^3.0.0",
     "next": "9.0.7",
+    "next-nprogress": "^1.4.0",
     "react": "16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-bootstrap-table-next": "^3.2.1",
@@ -61,7 +62,9 @@
     "@types/classnames": "^2.2.9",
     "@types/cookie": "^0.3.3",
     "@types/graphql": "^14.5.0",
+    "@types/next-nprogress": "^1.4.0",
     "@types/node": "^12.7.11",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
     "@types/styled-components": "^4.1.19",
@@ -94,5 +97,8 @@
       "yarn lint:fix",
       "git add"
     ]
+  },
+  "resolutions": {
+    "styled-jsx": "3.0.0"
   }
 }
