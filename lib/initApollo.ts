@@ -1,8 +1,9 @@
 import ApolloClient from 'apollo-client';
 import { NormalizedCacheObject, InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
-import { createHttpLink } from 'apollo-link-http';
+import { createUploadLink } from 'apollo-upload-client';
 import fetch from 'isomorphic-unfetch';
 import Router from 'next/router';
 
@@ -20,9 +21,12 @@ interface Options {
 }
 
 function create(initialState: any, { getToken }: Options) {
-  const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/graphql',
+  const uploadLink = createUploadLink({
+    uri: `${process.env.BACKEND_URL}/graphql`,
     credentials: 'include',
+    headers: {
+      'keep-alive': 'true',
+    },
   });
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -51,7 +55,7 @@ function create(initialState: any, { getToken }: Options) {
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser, // Disables forceFetch on the server (so queries are only run once)
-    link: errorLink.concat(authLink.concat(httpLink)),
+    link: ApolloLink.from([authLink, errorLink, uploadLink]),
     cache: new InMemoryCache().restore(initialState || {}),
   });
 }

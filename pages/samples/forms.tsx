@@ -40,7 +40,6 @@ const Forms: NextPage<Props> = () => {
               <Formik
                 validationSchema={schema}
                 onSubmit={values => {
-                  console.log(values);
                   setVisible(true);
                   setTimeout(() => {
                     setVisible(false);

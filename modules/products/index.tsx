@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Modal, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
   PaginationProvider,
@@ -8,10 +8,18 @@ import paginationFactory, {
   SizePerPageDropdownStandalone,
 } from 'react-bootstrap-table2-paginator';
 
-import { Layout, Loading } from '../../components';
-import { useGetProductsQuery } from '../../generated/graphql';
+import { Error, Layout, Loading, Toast } from '../../components';
+import {
+  useGetProductsQuery,
+  useUploadFileMutation,
+  useCreateProductMutation,
+  GetProductsDocument,
+} from '../../generated/graphql';
+import ProductForm from './ProductForm';
 
-const imageFormatter = (cell: any) => <img src={cell} alt="" style={{ width: 50 }} />;
+const imageFormatter = (cell: any) => (
+  <img src={`${process.env.BACKEND_URL}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
+);
 const priceFormatter = (cell: any) => <span>${cell}</span>;
 const isActiveFormatter = (cell: any) => (
   <span>
@@ -86,15 +94,55 @@ const defaultSorted = [
 
 interface Props {
   loading: boolean;
-  // error: string;
+  error: string;
   data: Array<any>;
 }
 
 const Products: NextPage<Props> = () => {
-  const { loading, data } = useGetProductsQuery();
+  const [modalShow, setModalShow] = useState(false);
+  const [toastShow, setToastShow] = useState(false);
+  const { loading, error, data } = useGetProductsQuery();
+  const [uploadFile] = useUploadFileMutation();
+  const [createProduct] = useCreateProductMutation();
+
+  const handleSubmit = async (value: any) => {
+    try {
+      await uploadFile({
+        variables: {
+          file: value.file,
+        },
+      });
+
+      delete value['file'];
+
+      await createProduct({
+        variables: {
+          data: value,
+        },
+        refetchQueries: [
+          {
+            query: GetProductsDocument,
+          },
+        ],
+      });
+
+      setModalShow(false);
+      setToastShow(true);
+
+      setTimeout(() => {
+        setToastShow(false);
+      }, 5000);
+    } catch (err) {
+      alert(err);
+    }
+    setModalShow(false);
+  };
+
+  const handleModalShow = () => setModalShow(true);
+  const handleModalClose = () => setModalShow(false);
 
   if (loading) return <Loading />;
-  // if (error) return <Error title="Error" content={error} />;
+  if (error) return <Error title="Error" content={error.message} />;
 
   return (
     <Layout title="Products">
@@ -104,7 +152,6 @@ const Products: NextPage<Props> = () => {
             custom: true,
             page: 1,
             sizePerPage: 10,
-            // ...options,
             totalSize: data && data.getProducts.length,
           })}
         >
@@ -114,8 +161,19 @@ const Products: NextPage<Props> = () => {
                 <Col xs="12">
                   <Card>
                     <Card.Header>
-                      <i className="fas fa-align-justify" />
-                      <strong>Products</strong>
+                      <div className="d-flex d-column justify-content-between align-items-center">
+                        <div>
+                          <i className="fas fa-align-justify mr-2" />
+                          <strong>PRODUCTS</strong>
+                        </div>
+                        <div>
+                          <button className="btn btn-outline-light bg-light" onClick={handleModalShow}>
+                            <h2 className="text-primary">
+                              <i className="fas fa-plus-square align-text-bottom" />
+                            </h2>
+                          </button>
+                        </div>
+                      </div>
                     </Card.Header>
                     <Card.Body>
                       <div className="d-flex d-column justify-content-between">
@@ -132,7 +190,7 @@ const Products: NextPage<Props> = () => {
                             style={{ height: '35px' }}
                           />
                           <button
-                            className="btn btn-default btn-secondary react-bs-table-search-clear-btn ml-2"
+                            className="btn btn-outline-primary react-bs-table-search-clear-btn ml-2"
                             type="button"
                             style={{ width: '75px' }}
                           >
@@ -166,6 +224,22 @@ const Products: NextPage<Props> = () => {
             </>
           )}
         </PaginationProvider>
+
+        <Modal show={modalShow} onHide={handleModalClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Product</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ProductForm onSubmit={handleSubmit} onCancel={handleModalClose} />
+          </Modal.Body>
+        </Modal>
+
+        <Toast
+          show={toastShow}
+          onClose={() => setToastShow(false)}
+          type="success"
+          message="Data has been save successfuly."
+        />
       </div>
     </Layout>
   );

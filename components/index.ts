@@ -15,6 +15,7 @@ import SidebarMinimizer from './SidebarMinimizer';
 import SidebarNav from './SidebarNav';
 import SidebarToggler from './SidebarToggler';
 import Switch from './Switch';
+import Toast from './Toast';
 import Validator from './Validator';
 
 export {
@@ -35,5 +36,6 @@ export {
   SidebarNav,
   SidebarToggler,
   Switch,
+  Toast,
   Validator,
 };

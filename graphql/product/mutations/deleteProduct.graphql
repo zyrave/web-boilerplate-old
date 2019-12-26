@@ -1,0 +1,14 @@
+mutation DeleteProduct($id: Float!) {
+  deleteProduct(id: $id) {
+    id
+    name
+    category
+    price
+    quantity
+    imagePath
+    isActive
+    createdAt
+    updatedAt
+    createdBy
+  }
+}
