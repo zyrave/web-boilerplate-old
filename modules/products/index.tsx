@@ -105,6 +105,11 @@ const Products: NextPage<Props> = () => {
   const [uploadFile] = useUploadFileMutation();
   const [createProduct] = useCreateProductMutation();
 
+  const showModal = () => setModalShow(true);
+  const closeModal = () => setModalShow(false);
+  const showToast = () => setToastShow(true);
+  const closeToast = () => setToastShow(false);
+
   const handleSubmit = async (value: any) => {
     try {
       await uploadFile({
@@ -126,20 +131,16 @@ const Products: NextPage<Props> = () => {
         ],
       });
 
-      setModalShow(false);
-      setToastShow(true);
+      closeModal();
+      showToast();
 
-      setTimeout(() => {
-        setToastShow(false);
-      }, 5000);
+      // setTimeout(() => {
+      //   closeToast();
+      // }, 5000);
     } catch (err) {
       alert(err);
     }
-    setModalShow(false);
   };
-
-  const handleModalShow = () => setModalShow(true);
-  const handleModalClose = () => setModalShow(false);
 
   if (loading) return <Loading />;
   if (error) return <Error title="Error" content={error.message} />;
@@ -167,7 +168,7 @@ const Products: NextPage<Props> = () => {
                           <strong>PRODUCTS</strong>
                         </div>
                         <div>
-                          <button className="btn btn-outline-light bg-light" onClick={handleModalShow}>
+                          <button className="btn btn-outline-light bg-light" onClick={showModal}>
                             <h2 className="text-primary">
                               <i className="fas fa-plus-square align-text-bottom" />
                             </h2>
@@ -225,22 +226,16 @@ const Products: NextPage<Props> = () => {
           )}
         </PaginationProvider>
 
-        <Modal show={modalShow} onHide={handleModalClose} centered>
+        <Modal show={modalShow} onHide={closeModal} centered>
           <Modal.Header closeButton>
             <Modal.Title>Add Product</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ProductForm onSubmit={handleSubmit} onCancel={handleModalClose} />
+            <ProductForm onSubmit={handleSubmit} onCancel={closeModal} />
           </Modal.Body>
         </Modal>
-
-        <Toast
-          show={toastShow}
-          onClose={() => setToastShow(false)}
-          type="success"
-          message="Data has been save successfuly."
-        />
       </div>
+      <Toast show={toastShow} onClose={closeToast} type="success" message="Data has been save successfuly." />
     </Layout>
   );
 };
