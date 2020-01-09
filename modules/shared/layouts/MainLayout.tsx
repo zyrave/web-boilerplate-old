@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react';
-import Head from 'next/head';
 import { Container } from 'react-bootstrap';
 
 import {
@@ -13,19 +12,18 @@ import {
   SidebarHeader,
   // SidebarMinimizer,
   SidebarNav,
-} from '../components';
-import navigation from '../_nav';
-import routes from '../routes';
-import { useLogoutMutation } from '../generated/graphql';
-import redirect from '../lib/redirect';
-import Validator from './Validator';
+} from '..';
+import navigation from '../../../_nav';
+import routes from '../../../routes';
+import { useLogoutMutation } from '../../../generated/graphql';
+import redirect from '../../../utils/redirect';
+import Validator from '../Validator';
 
 interface Props {
   children?: ReactNode;
-  title: string;
 }
 
-const Layout: FC<Props> = ({ children, title }, ...ctx) => {
+const MainLayout: FC<Props> = ({ children }, ...ctx) => {
   const [logout] = useLogoutMutation();
   // const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
 
@@ -38,18 +36,13 @@ const Layout: FC<Props> = ({ children, title }, ...ctx) => {
         redirect(ctx, '/users/login');
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return;
     }
   };
 
   return (
     <Validator>
-      <Head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
       <div className="app">
         <Header fixed onLogout={e => handleLogout(e)} />
         <div className="app-body">
@@ -72,4 +65,4 @@ const Layout: FC<Props> = ({ children, title }, ...ctx) => {
   );
 };
 
-export default Layout;
+export default MainLayout;

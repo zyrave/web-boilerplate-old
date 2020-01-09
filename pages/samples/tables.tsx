@@ -1,8 +1,9 @@
-import React from 'react';
 import { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Layout, Loading, Error } from '../../components';
+import { Loading, Error, WithAuth } from '../../modules/shared';
 
 interface Props {
   loading: boolean;
@@ -15,7 +16,8 @@ const Tables: NextPage<Props> = ({ loading = false, error = undefined, data = []
   if (error) return <Error title="Error" content={error} />;
 
   return (
-    <Layout title="Sample - Tables">
+    <>
+      <NextSeo title="Tables" />
       <div className="animated fadeIn">
         <Row>
           <Col xs="12">
@@ -116,7 +118,7 @@ const Tables: NextPage<Props> = ({ loading = false, error = undefined, data = []
           </Col>
         </Row>
       </div>
-    </Layout>
+    </>
   );
 };
 
@@ -360,4 +362,4 @@ Tables.getInitialProps = async () => {
   return { loading, error, data };
 };
 
-export default Tables;
+export default WithAuth(Tables);

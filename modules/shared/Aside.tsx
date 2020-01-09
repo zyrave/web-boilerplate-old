@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Nav, ProgressBar, Tab, ListGroup } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import { Switch } from '../components';
-import { asideMenuCssClasses, checkBreakpoint, validBreakpoints } from '../lib/layouts';
-import toggleClasses from '../lib/layouts/toggle-classes';
+import { Switch } from '../shared';
+import { asideMenuCssClasses, checkBreakpoint, validBreakpoints } from '../../utils/layouts';
+import toggleClasses from '../../utils/layouts/toggle-classes';
 
 interface Props {
   className?: string;

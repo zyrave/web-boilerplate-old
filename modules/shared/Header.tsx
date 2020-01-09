@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Nav, Badge, Dropdown } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import { AsideToggler, NavbarBrand, SidebarToggler } from '../components';
+import { AsideToggler, NavbarBrand, SidebarToggler } from '../shared';
 
 interface Props {
   className?: string;

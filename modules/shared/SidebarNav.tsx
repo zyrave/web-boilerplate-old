@@ -7,7 +7,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { withRouter } from 'next/router';
 
-import NavContext from '../lib/NavContext';
+import NavContext from '../../utils/NavContext';
 
 interface Props {
   children?: ReactNode;

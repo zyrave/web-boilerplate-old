@@ -20,24 +20,6 @@ export default {
       class: '', // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Register',
-      url: '/users/register',
-      icon: 'icon-drop',
-    },
-    {
-      name: 'Login',
-      url: '/users/login',
-      icon: 'icon-pencil',
-    },
-    {
-      title: true,
-      name: 'Examples',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
-    },
-    {
       name: 'Products',
       url: '/products',
       icon: 'icon-list',

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { NextPage } from 'next';
-import Head from 'next/head';
-import Router from 'next/router';
-import Link from 'next/link';
 import { Formik, Field } from 'formik';
+import { NextPage } from 'next';
+import Link from 'next/link';
+import Router from 'next/router';
+import { NextSeo } from 'next-seo';
+import React, { useState } from 'react';
 import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 
-import { InputField } from '../../components/fields/InputField';
+import { InputField } from '../../modules/shared/fields/InputField';
 import { useRegisterMutation } from '../../generated/graphql';
 
 interface Props {}
@@ -17,11 +17,7 @@ const Register: NextPage<Props> = () => {
 
   return (
     <>
-      <Head>
-        <title>Register Page</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <NextSeo title="Register Page" />
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
@@ -66,7 +62,8 @@ const Register: NextPage<Props> = () => {
                     }}
                     validateOnBlur={false}
                     validateOnChange={false}
-                    render={({ handleSubmit }) => (
+                  >
+                    {({ handleSubmit }) => (
                       <Form onSubmit={handleSubmit}>
                         <Field name="firstName" placeholder="First Name *" icon="icon-user" component={InputField} />
                         <Field name="lastName" placeholder="Last Name *" icon="icon-user" component={InputField} />
@@ -94,7 +91,7 @@ const Register: NextPage<Props> = () => {
                         </Row>
                       </Form>
                     )}
-                  />
+                  </Formik>
                   <Row className="mt-4">
                     <Col className="mt-2 text-center">
                       Already have an account?

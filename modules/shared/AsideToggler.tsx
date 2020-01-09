@@ -2,8 +2,8 @@
 import React, { ReactNode, useEffect } from 'react';
 import classNames from 'classnames';
 
-import { asideMenuCssClasses, validBreakpoints, checkBreakpoint } from '../lib/layouts/index';
-import toggleClasses from '../lib/layouts/toggle-classes';
+import { asideMenuCssClasses, validBreakpoints, checkBreakpoint } from '../../utils/layouts/index';
+import toggleClasses from '../../utils/layouts/toggle-classes';
 
 interface Props {
   children?: ReactNode;

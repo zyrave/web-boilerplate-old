@@ -1,12 +1,12 @@
 import React from 'react';
 import { NextPage } from 'next';
-import Head from 'next/head';
 import Router from 'next/router';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 import { Formik, Field } from 'formik';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 
-import { InputField } from '../../components/fields/InputField';
+import { InputField } from '../../modules/shared/fields/InputField';
 import { useForgotPasswordMutation } from '../../generated/graphql';
 
 interface Props {}
@@ -16,11 +16,7 @@ const ForgotPassword: NextPage<Props> = () => {
 
   return (
     <>
-      <Head>
-        <title>Forgot Password Page</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <NextSeo title="Forgto Password Page" />
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
@@ -36,7 +32,8 @@ const ForgotPassword: NextPage<Props> = () => {
                       await forgotPassword({ variables: data });
                       Router.push('/users/check-email');
                     }}
-                    render={({ handleSubmit }) => (
+                  >
+                    {({ handleSubmit }) => (
                       <Form onSubmit={handleSubmit}>
                         <Field name="email" placeholder="Email *" icon="icon-envelope" component={InputField} />
                         <Row className="mt-3">
@@ -48,7 +45,7 @@ const ForgotPassword: NextPage<Props> = () => {
                         </Row>
                       </Form>
                     )}
-                  />
+                  </Formik>
                   <Row>
                     <Col className="mt-2 text-center">
                       <Link href="/users/login">

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { NextPage, NextPageContext } from 'next';
 
 import { useConfirmUserMutation } from '../../../generated/graphql';
-import redirect from '../../../lib/redirect';
+import redirect from '../../../utils/redirect';
 
 interface Props {
   token?: {};
@@ -26,7 +26,7 @@ const Confirm: NextPage<Props> = ({ token }, ...ctx) => {
           redirect(ctx, '/users/login');
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
         return;
       }
     };

@@ -1,14 +1,16 @@
-import React from 'react';
 import { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import React from 'react';
 
-import { Layout } from '../../components';
+import { WithAuth } from '../../modules/shared';
 
 interface Props {}
 
 const Themes: NextPage<Props> = () => (
-  <Layout title="Theme">
-    <div>Theme</div>
-  </Layout>
+  <>
+    <NextSeo title="Themes" />
+    <p>Themes</p>
+  </>
 );
 
-export default Themes;
+export default WithAuth(Themes);

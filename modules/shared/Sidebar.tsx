@@ -2,8 +2,8 @@ import React, { ReactNode, useEffect } from 'react';
 import classNames from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 
-import '../lib/layouts/element-closest';
-import { sidebarCssClasses } from '../lib/layouts';
+import '../../utils/layouts/element-closest';
+import { sidebarCssClasses } from '../../utils/layouts';
 // import LayoutHelper from './shared/layout/layout';
 
 interface Props {

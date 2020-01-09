@@ -1,9 +1,11 @@
 import React from 'react';
+import { NextSeo } from 'next-seo';
 
-import { Layout } from '../../components';
+import { WithAuth } from '../../modules/shared';
 
 const Dashboard = () => (
-  <Layout title="Dashboard">
+  <>
+    <NextSeo title="Dashboard" />
     <div className="content-wrapper mt-5">
       <section className="content-header">
         <div className="container-fluid">
@@ -24,7 +26,7 @@ const Dashboard = () => (
         </div>
       </section>
     </div>
-  </Layout>
+  </>
 );
 
-export default Dashboard;
+export default WithAuth(Dashboard);

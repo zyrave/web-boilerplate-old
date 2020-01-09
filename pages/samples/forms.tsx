@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { NextPage } from 'next';
-import * as yup from 'yup';
 import { Formik } from 'formik';
+import { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import React, { useState } from 'react';
 import { Form, Card, Row, Col, Button, Alert, InputGroup } from 'react-bootstrap';
+import * as yup from 'yup';
 
-import { Layout } from '../../components';
+import { WithAuth } from '../../modules/shared';
 
 const schema = yup.object({
   firstName: yup.string().required(),
@@ -22,7 +23,8 @@ const Forms: NextPage<Props> = () => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <Layout title="Basic Forms">
+    <>
+      <NextSeo title="Basic Forms" />
       <Row>
         <Col>
           <Alert variant="info" show={visible}>
@@ -39,7 +41,7 @@ const Forms: NextPage<Props> = () => {
             <Card.Body>
               <Formik
                 validationSchema={schema}
-                onSubmit={values => {
+                onSubmit={() => {
                   setVisible(true);
                   setTimeout(() => {
                     setVisible(false);
@@ -143,8 +145,8 @@ const Forms: NextPage<Props> = () => {
           </Card>
         </Col>
       </Row>
-    </Layout>
+    </>
   );
 };
 
-export default Forms;
+export default WithAuth(Forms);

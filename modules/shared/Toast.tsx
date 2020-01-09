@@ -54,7 +54,7 @@ const Toast: FC<Props> = ({ show = false, onClose, type = 'info', message = '', 
             style={{ cursor: 'pointer' }}
             role="presentation"
             onClick={() => onClose()}
-            onKeyDown={() => {}}
+            onKeyDown={() => null}
           >
             <i className="fas fa-times" />
           </div>

@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
-import { sidebarCssClasses, validBreakpoints, checkBreakpoint } from '../lib/layouts/index';
-import toggleClasses from '../lib/layouts/toggle-classes';
+import { sidebarCssClasses, validBreakpoints, checkBreakpoint } from '../../utils/layouts/index';
+import toggleClasses from '../../utils/layouts/toggle-classes';
 
 interface Props {
   children?: ReactNode;

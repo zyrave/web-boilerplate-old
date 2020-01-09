@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import React, { useState } from 'react';
 import { Card, Col, Modal, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
@@ -8,7 +9,7 @@ import paginationFactory, {
   SizePerPageDropdownStandalone,
 } from 'react-bootstrap-table2-paginator';
 
-import { Error, Layout, Loading, Toast } from '../../components';
+import { Error, Loading, Toast, WithAuth } from '../shared';
 import {
   useGetProductsQuery,
   useUploadFileMutation,
@@ -146,7 +147,8 @@ const Products: NextPage<Props> = () => {
   if (error) return <Error title="Error" content={error.message} />;
 
   return (
-    <Layout title="Products">
+    <>
+      <NextSeo title="Products" description="List of Products" />
       <div className="animated fadeIn">
         <PaginationProvider
           pagination={paginationFactory({
@@ -236,8 +238,8 @@ const Products: NextPage<Props> = () => {
         </Modal>
       </div>
       <Toast show={toastShow} onClose={closeToast} type="success" message="Data has been save successfuly." />
-    </Layout>
+    </>
   );
 };
 
-export default Products;
+export default WithAuth(Products);

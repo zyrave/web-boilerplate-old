@@ -4,7 +4,6 @@ import AppBreadcrumb from './Breadcrumb';
 import Error from './Error';
 import Footer from './Footer';
 import Header from './Header';
-import Layout from './Layout';
 import Loading from './Loading';
 import NavbarBrand from './NavbarBrand';
 import Sidebar from './Sidebar';
@@ -17,6 +16,7 @@ import SidebarToggler from './SidebarToggler';
 import Switch from './Switch';
 import Toast from './Toast';
 import Validator from './Validator';
+import WithAuth from './WithAuth';
 
 export {
   Aside,
@@ -25,7 +25,6 @@ export {
   Error,
   Footer,
   Header,
-  Layout,
   Loading,
   NavbarBrand,
   Sidebar,
@@ -38,4 +37,5 @@ export {
   Switch,
   Toast,
   Validator,
+  WithAuth,
 };

@@ -90,7 +90,7 @@ const Switch: React.FC<Props> = ({
   const sliderClasses = classNames('switch-slider');
 
   return (
-    <label className={classes} onKeyUp={handleKeyUp} onKeyDown={handleKeyDown}>
+    <label className={classes} role="presentation" onKeyUp={handleKeyUp} onKeyDown={handleKeyDown}>
       <input
         type={type}
         className={inputClasses}
