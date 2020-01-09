@@ -85,7 +85,7 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
         </Nav.Item>
         <Dropdown className="nav-item mr-2">
           <Dropdown.Toggle id="" className="nav-link" as="a">
-            <img src={'/static/images/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+            <img src={'/static/images/avatars/0.jpg'} className="img-avatar" alt="admin@company.com" />
           </Dropdown.Toggle>
           <Dropdown.Menu alignRight>
             <Dropdown.Header as="div" className="text-center">

@@ -170,20 +170,18 @@ const Products: NextPage<Props> = () => {
                           <strong>PRODUCTS</strong>
                         </div>
                         <div>
-                          <button className="btn btn-outline-light bg-light" onClick={showModal}>
-                            <h2 className="text-primary">
-                              <i className="fas fa-plus-square align-text-bottom" />
-                            </h2>
+                          <button className="btn bg-primary btn-circle" onClick={showModal}>
+                            <i className="fas fa-plus text-white" />
                           </button>
                         </div>
                       </div>
                     </Card.Header>
                     <Card.Body>
                       <div className="d-flex d-column justify-content-between">
-                        <div className="">
+                        <div className="d-none d-sm-block">
                           Show <SizePerPageDropdownStandalone className="mx-2 bg-light" {...paginationProps} /> entries
                         </div>
-                        <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm w-50">
+                        <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm col-md-6">
                           <input
                             className="form-control"
                             type="text"
@@ -200,7 +198,7 @@ const Products: NextPage<Props> = () => {
                             Search
                           </button>
                         </div>
-                        <div>
+                        <div className="d-none d-sm-block">
                           <PaginationListStandalone {...paginationProps} />
                         </div>
                       </div>
