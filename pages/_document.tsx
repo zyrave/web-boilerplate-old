@@ -33,9 +33,8 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-          <link rel="stylesheet" href="static/css/fontawesome.min.css" />
-          <link rel="stylesheet" href="static/css/simple-line-icons.css" />
-          <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+          <link rel="stylesheet" href="/static/css/simple-line-icons.css" />
+          <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
         </Head>
         <body className="custom_class">
           <Main />

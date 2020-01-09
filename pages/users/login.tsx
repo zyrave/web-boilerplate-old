@@ -18,7 +18,7 @@ const Login: NextPage = () => {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="4">
+            <Col md="6" lg="4">
               <Card className="p-4">
                 <Card.Body>
                   <h1 className="text-center">Login</h1>
