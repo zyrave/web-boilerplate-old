@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Form, Card, Row, Col, Button, Alert, InputGroup } from 'react-bootstrap';
 import * as yup from 'yup';
 
-import { WithAuth } from '../../modules/shared';
+import withAuth from '../../utils/withAuth';
 
 const schema = yup.object({
   firstName: yup.string().required(),
@@ -149,4 +149,4 @@ const Forms: NextPage<Props> = () => {
   );
 };
 
-export default WithAuth(Forms);
+export default withAuth(Forms);

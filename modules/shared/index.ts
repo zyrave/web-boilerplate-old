@@ -16,7 +16,6 @@ import SidebarToggler from './SidebarToggler';
 import Switch from './Switch';
 import Toast from './Toast';
 import Validator from './Validator';
-import WithAuth from './WithAuth';
 
 export {
   Aside,
@@ -37,5 +36,4 @@ export {
   Switch,
   Toast,
   Validator,
-  WithAuth,
 };

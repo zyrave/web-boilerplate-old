@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextSeo } from 'next-seo';
 
-import { WithAuth } from '../../modules/shared';
+import withAuth from '../../utils/withAuth';
 
 const Dashboard = () => (
   <>
@@ -29,4 +29,4 @@ const Dashboard = () => (
   </>
 );
 
-export default WithAuth(Dashboard);
+export default withAuth(Dashboard);

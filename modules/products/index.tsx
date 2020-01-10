@@ -9,7 +9,6 @@ import paginationFactory, {
   SizePerPageDropdownStandalone,
 } from 'react-bootstrap-table2-paginator';
 
-import { Error, Loading, Toast, WithAuth } from '../shared';
 import {
   useGetProductsQuery,
   useUploadFileMutation,
@@ -17,6 +16,8 @@ import {
   GetProductsDocument,
 } from '../../generated/graphql';
 import ProductForm from './ProductForm';
+import { Error, Loading, Toast } from '../shared';
+import withAuth from '../../utils/withAuth';
 
 const imageFormatter = (cell: any) => (
   <img src={`${process.env.BACKEND_URL}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
@@ -240,4 +241,4 @@ const Products: NextPage<Props> = () => {
   );
 };
 
-export default WithAuth(Products);
+export default withAuth(Products);

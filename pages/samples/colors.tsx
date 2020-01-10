@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { WithAuth } from '../../modules/shared';
+import withAuth from '../../utils/withAuth';
 
 interface Props {}
 
@@ -13,4 +13,4 @@ const Colors: NextPage<Props> = () => (
   </>
 );
 
-export default WithAuth(Colors);
+export default withAuth(Colors);

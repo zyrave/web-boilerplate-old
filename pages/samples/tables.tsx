@@ -3,7 +3,8 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Loading, Error, WithAuth } from '../../modules/shared';
+import { Loading, Error } from '../../modules/shared';
+import withAuth from '../../utils/withAuth';
 
 interface Props {
   loading: boolean;
@@ -362,4 +363,4 @@ Tables.getInitialProps = async () => {
   return { loading, error, data };
 };
 
-export default WithAuth(Tables);
+export default withAuth(Tables);
