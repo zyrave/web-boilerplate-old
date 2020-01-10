@@ -4,7 +4,7 @@ import { NormalizedCacheObject } from 'apollo-cache-inmemory';
 
 import { useLogoutMutation } from '../../generated/graphql';
 import { NextPageWithApolloClient, NextPageContextWithApolloClient } from '../../interfaces';
-import redirect from '../../utils/redirect';
+import redirectTo from '../../utils/redirectTo';
 
 interface Props {
   apolloClient: ApolloClient<NormalizedCacheObject>;
@@ -20,7 +20,7 @@ const Logout: NextPageWithApolloClient<Props> = ({ apolloClient, ...ctx }) => {
       try {
         await logout();
         await apolloClient.resetStore();
-        redirect(ctx, '/users/login');
+        redirectTo(ctx, '/users/login');
       } catch (err) {
         console.error(err);
         return;

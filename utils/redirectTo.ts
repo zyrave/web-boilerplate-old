@@ -1,14 +1,15 @@
 import Router from 'next/router';
 
-export default (ctx: any, target: string) => {
-  const { req, res } = ctx;
-  const isServer = !!req;
+const redirectTo = ({ res }: any, target: string) => {
+  const isServer = !!res;
 
   if (isServer) {
     res.writeHead(302, { Location: target });
     res.end();
   } else {
-    // in the browser
+    // browser
     Router.push(target);
   }
 };
+
+export default redirectTo;

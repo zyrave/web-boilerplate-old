@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import React from 'react';
 
-import redirect from './redirect';
 import { MeDocument, MeQuery } from '../generated/graphql';
 import { NextPageContextWithApollo } from '../types/NextPageContextWithApollo';
+import redirectTo from './redirectTo';
 
 const withAuth = <T extends object>(WrappedComponent: NextPage<T>) => {
   const withAuthWrapper = (props: any) => <WrappedComponent {...props} />;
@@ -14,7 +14,7 @@ const withAuth = <T extends object>(WrappedComponent: NextPage<T>) => {
     });
 
     if (!response.data!.me) {
-      redirect(ctx, '/');
+      redirectTo(ctx, '/');
       return {
         me: null,
       };

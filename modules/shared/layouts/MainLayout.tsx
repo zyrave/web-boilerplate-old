@@ -14,9 +14,9 @@ import {
   SidebarNav,
 } from '..';
 import navigation from '../../../_nav';
-import routes from '../../../routes';
 import { useLogoutMutation } from '../../../generated/graphql';
-import redirect from '../../../utils/redirect';
+import redirectTo from '../../../utils/redirectTo';
+import routes from '../../../routes';
 import Validator from '../Validator';
 
 interface Props {
@@ -33,7 +33,7 @@ const MainLayout: FC<Props> = ({ children }, ...ctx) => {
       const response = await logout();
 
       if (response.data) {
-        redirect(ctx, '/users/login');
+        redirectTo(ctx, '/users/login');
       }
     } catch (err) {
       console.error(err);

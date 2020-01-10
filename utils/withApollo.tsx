@@ -1,14 +1,14 @@
-import React from 'react';
-import cookie from 'cookie';
-import Head from 'next/head';
-import { ApolloClient } from 'apollo-client';
-import { NormalizedCacheObject } from 'apollo-cache-inmemory';
-import PropTypes from 'prop-types';
 import { getDataFromTree } from '@apollo/react-ssr';
+import { NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
+import cookie from 'cookie';
+import React from 'react';
+import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 import initApollo from './initApollo';
 import { isBrowser } from './isBrowser';
-import redirect from './redirect';
+import redirectTo from './redirectTo';
 
 const parseCookies = (req?: any, options = {}) =>
   cookie.parse(req ? req.headers.cookie || '' : document.cookie, options);
@@ -58,7 +58,7 @@ export default (App: any) =>
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
           console.error('Error while running `getDataFromTree`', error);
           if (error.message.includes('Access denied! You need to be authorized to perform this action!')) {
-            redirect(ctx.ctx, '/users/login');
+            redirectTo(ctx.ctx, '/users/login');
           }
         }
 
