@@ -1,8 +1,8 @@
-import ApolloClient from 'apollo-client';
 import { NormalizedCacheObject, InMemoryCache } from 'apollo-cache-inmemory';
+import ApolloClient from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
-import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
+import { setContext } from 'apollo-link-context';
 import { createUploadLink } from 'apollo-upload-client';
 import fetch from 'isomorphic-unfetch';
 import Router from 'next/router';
