@@ -58,8 +58,6 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@fortawesome/free-brands-svg-icons": "^5.11.2",
-    "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@graphql-codegen/cli": "^1.8.0",
     "@graphql-codegen/typescript": "1.8.0",
     "@graphql-codegen/typescript-operations": "1.8.0",

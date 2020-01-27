@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
-import { Card, Col, Modal, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Modal, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
   PaginationProvider,
@@ -16,7 +16,7 @@ import {
   GetProductsDocument,
 } from '../../generated/graphql';
 import ProductForm from './ProductForm';
-import { Error, Loading, Toast } from '../shared';
+import { Error, Loading } from '../shared';
 import withAuth from '../../utils/withAuth';
 
 const imageFormatter = (cell: any) => (
@@ -102,15 +102,15 @@ interface Props {
 
 const Products: NextPage<Props> = () => {
   const [modalShow, setModalShow] = useState(false);
-  const [toastShow, setToastShow] = useState(false);
+  const [alertShow, setAlertShow] = useState(false);
   const { loading, error, data } = useGetProductsQuery();
   const [uploadFile] = useUploadFileMutation();
   const [createProduct] = useCreateProductMutation();
 
   const showModal = () => setModalShow(true);
   const closeModal = () => setModalShow(false);
-  const showToast = () => setToastShow(true);
-  const closeToast = () => setToastShow(false);
+  const showAlert = () => setAlertShow(true);
+  const closeAlert = () => setAlertShow(false);
 
   const handleSubmit = async (value: any) => {
     try {
@@ -134,11 +134,8 @@ const Products: NextPage<Props> = () => {
       });
 
       closeModal();
-      showToast();
-
-      // setTimeout(() => {
-      //   closeToast();
-      // }, 5000);
+      showAlert();
+      setTimeout(() => closeAlert(), 5000);
     } catch (err) {
       alert(err);
     }
@@ -150,6 +147,10 @@ const Products: NextPage<Props> = () => {
   return (
     <>
       <NextSeo title="Products" description="List of Products" />
+      <Alert show={alertShow} variant="success" onClose={() => closeAlert()} dismissible>
+        <i className="fas fa-check-circle mr-2" />
+        The product was added successfully.
+      </Alert>
       <div className="animated fadeIn">
         <PaginationProvider
           pagination={paginationFactory({
@@ -236,7 +237,6 @@ const Products: NextPage<Props> = () => {
           </Modal.Body>
         </Modal>
       </div>
-      <Toast show={toastShow} onClose={closeToast} type="success" message="Data has been save successfuly." />
     </>
   );
 };

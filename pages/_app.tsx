@@ -1,7 +1,7 @@
-import React from 'react';
-import NextApp from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
+import NextApp from 'next/app';
 import NProgress from 'next-nprogress/component';
+import React from 'react';
 
 import withApollo from '../utils/withApollo';
 import NavContext from '../utils/NavContext';
