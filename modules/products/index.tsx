@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
-import { Alert, Card, Col, Modal, Row } from 'react-bootstrap';
+import { Alert, Card, Col, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
+// import cellEditFactory from 'react-bootstrap-table2-editor';
 import paginationFactory, {
   PaginationProvider,
   PaginationListStandalone,
@@ -18,6 +19,7 @@ import {
 import ProductForm from './ProductForm';
 import { Error, Loading } from '../shared';
 import withAuth from '../../utils/withAuth';
+// import redirectTo from '../../utils/redirectTo';
 
 const imageFormatter = (cell: any) => (
   <img src={`${process.env.BACKEND_URL}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
@@ -103,14 +105,30 @@ interface Props {
 const Products: NextPage<Props> = () => {
   const [modalShow, setModalShow] = useState(false);
   const [alertShow, setAlertShow] = useState(false);
+  const [product, setProduct] = useState({});
   const { loading, error, data } = useGetProductsQuery();
   const [uploadFile] = useUploadFileMutation();
   const [createProduct] = useCreateProductMutation();
+  // const [updateProduct] = useUpdateProductMutaion();
 
-  const showModal = () => setModalShow(true);
-  const closeModal = () => setModalShow(false);
+  const showModal = (selectedData: {}) => {
+    setProduct(selectedData);
+    setModalShow(true);
+  };
+  const closeModal = () => {
+    setModalShow(false);
+    setProduct({});
+  };
+
   const showAlert = () => setAlertShow(true);
   const closeAlert = () => setAlertShow(false);
+
+  const rowEvents = {
+    // @ts-ignore
+    onDoubleClick: (e: any, row: any) => {
+      showModal(row);
+    },
+  };
 
   const handleSubmit = async (value: any) => {
     try {
@@ -122,16 +140,20 @@ const Products: NextPage<Props> = () => {
 
       delete value['file'];
 
-      await createProduct({
-        variables: {
-          data: value,
-        },
-        refetchQueries: [
-          {
-            query: GetProductsDocument,
-          },
-        ],
-      });
+      {
+        !!product
+          ? null
+          : await createProduct({
+              variables: {
+                data: value,
+              },
+              refetchQueries: [
+                {
+                  query: GetProductsDocument,
+                },
+              ],
+            });
+      }
 
       closeModal();
       showAlert();
@@ -212,6 +234,16 @@ const Products: NextPage<Props> = () => {
                           columns={columns}
                           rowStyle={{ verticalAlign: 'middle' }}
                           defaultSorted={defaultSorted}
+                          // cellEdit={cellEditFactory({
+                          //   mode: 'dbclick',
+                          //   blurToSave: true,
+                          // })}
+                          // selectRow={{
+                          //   mode: 'checkbox',
+                          //   clickToSelect: true,
+                          //   clickToEdit: true,
+                          // }}
+                          rowEvents={rowEvents}
                           bordered={false}
                           // striped
                           hover
@@ -227,15 +259,7 @@ const Products: NextPage<Props> = () => {
             </>
           )}
         </PaginationProvider>
-
-        <Modal show={modalShow} onHide={closeModal} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Product</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ProductForm onSubmit={handleSubmit} onCancel={closeModal} />
-          </Modal.Body>
-        </Modal>
+        {modalShow && <ProductForm onSubmit={handleSubmit} onCancel={closeModal} product={product} />}
       </div>
     </>
   );

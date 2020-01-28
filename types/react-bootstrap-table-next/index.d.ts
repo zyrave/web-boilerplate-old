@@ -90,6 +90,7 @@ interface CellEditProps {
   beforeSaveCell?: (oldValue: TODO, newValue: TODO, row: TODO, column: TODO) => TODO;
   afterSaveCell?: (oldValue: TODO, newValue: TODO, row: TODO, column: TODO) => TODO;
   onStartEdit?: (row: TODO, column: TODO, rowIndex: TODO, columnIndex: TODO) => TODO;
+  blurToSave?: boolean;
 }
 
 type onTableChange = (type: TableChangeType, event: TableChangeNewState) => TODO;
