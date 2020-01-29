@@ -1,3 +1,4 @@
+import Alert from './Alert';
 import Aside from './Aside';
 import AsideToggler from './AsideToggler';
 import AppBreadcrumb from './Breadcrumb';
@@ -18,6 +19,7 @@ import Toast from './Toast';
 import Validator from './Validator';
 
 export {
+  Alert,
   Aside,
   AsideToggler,
   AppBreadcrumb as Breadcrumb,

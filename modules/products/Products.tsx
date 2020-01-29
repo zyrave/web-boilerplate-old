@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
-import { Alert, Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import BootstrapTable from 'react-bootstrap-table-next';
-// import cellEditFactory from 'react-bootstrap-table2-editor';
 import paginationFactory, {
   PaginationProvider,
   PaginationListStandalone,
@@ -15,11 +15,12 @@ import {
   useUploadFileMutation,
   useCreateProductMutation,
   GetProductsDocument,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } from '../../generated/graphql';
 import ProductForm from './ProductForm';
-import { Error, Loading } from '../shared';
+import { Alert, Error, Loading } from '../shared';
 import withAuth from '../../utils/withAuth';
-// import redirectTo from '../../utils/redirectTo';
 
 const imageFormatter = (cell: any) => (
   <img src={`${process.env.BACKEND_URL}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
@@ -96,6 +97,25 @@ const defaultSorted = [
   },
 ];
 
+interface Alert {
+  show: boolean;
+  type?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light';
+  message?: string | null;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  quantity: number;
+  imagePath: string;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: string;
+}
+
 interface Props {
   loading: boolean;
   error: string;
@@ -104,24 +124,26 @@ interface Props {
 
 const Products: NextPage<Props> = () => {
   const [modalShow, setModalShow] = useState(false);
-  const [alertShow, setAlertShow] = useState(false);
-  const [product, setProduct] = useState({});
+  const [alert, setAlert] = useState({
+    show: false,
+    type: 'success',
+    message: '',
+  } as Alert);
+  const [product, setProduct] = useState({} as Product | null);
   const { loading, error, data } = useGetProductsQuery();
   const [uploadFile] = useUploadFileMutation();
   const [createProduct] = useCreateProductMutation();
-  // const [updateProduct] = useUpdateProductMutaion();
+  const [updateProduct] = useUpdateProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
 
-  const showModal = (selectedData: {}) => {
+  const showModal = (selectedData: Product) => {
     setProduct(selectedData);
     setModalShow(true);
   };
   const closeModal = () => {
     setModalShow(false);
-    setProduct({});
+    setProduct(null);
   };
-
-  const showAlert = () => setAlertShow(true);
-  const closeAlert = () => setAlertShow(false);
 
   const rowEvents = {
     // @ts-ignore
@@ -140,26 +162,90 @@ const Products: NextPage<Props> = () => {
 
       delete value['file'];
 
-      {
-        !!product
-          ? null
-          : await createProduct({
-              variables: {
-                data: value,
-              },
-              refetchQueries: [
-                {
-                  query: GetProductsDocument,
-                },
-              ],
-            });
+      if (!_.isEmpty(product)) {
+        if (value.imagePath === '') {
+          value.imagePath = product && product.imagePath;
+        }
+
+        const newValue = { ...value, id: product && parseFloat(product.id.toString()) };
+
+        await updateProduct({
+          variables: {
+            data: newValue,
+          },
+          refetchQueries: [
+            {
+              query: GetProductsDocument,
+            },
+          ],
+        });
+
+        closeModal();
+
+        setAlert({
+          show: true,
+          type: 'success',
+          message: 'The product was updated successfully.',
+        });
+      } else {
+        await createProduct({
+          variables: {
+            data: value,
+          },
+          refetchQueries: [
+            {
+              query: GetProductsDocument,
+            },
+          ],
+        });
+
+        closeModal();
+
+        setAlert({
+          show: true,
+          type: 'success',
+          message: 'The product was added successfully.',
+        });
       }
+    } catch (err) {
+      closeModal();
+
+      setAlert({
+        show: true,
+        type: 'danger',
+        message: err,
+      });
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteProduct({
+        variables: {
+          id: parseFloat(product!.id.toString()),
+        },
+        refetchQueries: [
+          {
+            query: GetProductsDocument,
+          },
+        ],
+      });
 
       closeModal();
-      showAlert();
-      setTimeout(() => closeAlert(), 5000);
+
+      setAlert({
+        show: true,
+        type: 'success',
+        message: 'The product was deleted successfully.',
+      });
     } catch (err) {
-      alert(err);
+      closeModal();
+
+      setAlert({
+        show: true,
+        type: 'danger',
+        message: err,
+      });
     }
   };
 
@@ -169,10 +255,7 @@ const Products: NextPage<Props> = () => {
   return (
     <>
       <NextSeo title="Products" description="List of Products" />
-      <Alert show={alertShow} variant="success" onClose={() => closeAlert()} dismissible>
-        <i className="fas fa-check-circle mr-2" />
-        The product was added successfully.
-      </Alert>
+      <Alert show={alert.show} type={alert.type} message={alert.message} onClose={() => setAlert({ show: false })} />
       <div className="animated fadeIn">
         <PaginationProvider
           pagination={paginationFactory({
@@ -194,7 +277,7 @@ const Products: NextPage<Props> = () => {
                           <strong>PRODUCTS</strong>
                         </div>
                         <div>
-                          <button className="btn bg-primary btn-circle" onClick={showModal}>
+                          <button className="btn bg-primary btn-circle" onClick={() => setModalShow(true)}>
                             <i className="fas fa-plus text-white" />
                           </button>
                         </div>
@@ -234,20 +317,9 @@ const Products: NextPage<Props> = () => {
                           columns={columns}
                           rowStyle={{ verticalAlign: 'middle' }}
                           defaultSorted={defaultSorted}
-                          // cellEdit={cellEditFactory({
-                          //   mode: 'dbclick',
-                          //   blurToSave: true,
-                          // })}
-                          // selectRow={{
-                          //   mode: 'checkbox',
-                          //   clickToSelect: true,
-                          //   clickToEdit: true,
-                          // }}
                           rowEvents={rowEvents}
                           bordered={false}
-                          // striped
                           hover
-                          // condensed
                           {...paginationTableProps}
                         />
                         <hr />
@@ -259,7 +331,9 @@ const Products: NextPage<Props> = () => {
             </>
           )}
         </PaginationProvider>
-        {modalShow && <ProductForm onSubmit={handleSubmit} onCancel={closeModal} product={product} />}
+        {modalShow && (
+          <ProductForm onSubmit={handleSubmit} onCancel={closeModal} onDelete={handleDelete} product={product} />
+        )}
       </div>
     </>
   );

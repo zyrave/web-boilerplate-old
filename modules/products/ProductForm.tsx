@@ -13,23 +13,24 @@ const schema = yup.object({
 });
 
 interface Props {
-  onSubmit: (data: {}) => void;
   onCancel: () => void;
+  onSubmit: (data: {}) => void;
+  onDelete: () => void;
   product?: any;
 }
 
-const ProductForm: NextPage<Props> = ({ onSubmit, onCancel, product }) => (
+const ProductForm: NextPage<Props> = ({ onCancel, onDelete, onSubmit, product }) => (
   <Modal show={true} onHide={onCancel} centered>
     <Modal.Header closeButton>
-      <Modal.Title>{!!product.id ? 'Edit' : 'Add'} Product</Modal.Title>
+      <Modal.Title>{product && product.id ? 'Edit' : 'Add'} Product</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Formik
         validationSchema={schema}
         onSubmit={d => onSubmit(d)}
         initialValues={{
-          name: product && product.name,
-          category: product && product.category,
+          name: (product && product.name) || '',
+          category: (product && product.category) || '',
           price: (product && product.price) || 0,
           quantity: (product && product.quantity) || 0,
           isActive: true,
@@ -109,6 +110,13 @@ const ProductForm: NextPage<Props> = ({ onSubmit, onCancel, product }) => (
               <small className="form-text text-muted">Max Size 3MB</small>
             </Form.Group>
             <hr />
+            {!!product.id && (
+              <div className="float-left">
+                <Button variant="danger" className="mr-2" onClick={onDelete}>
+                  Delete
+                </Button>
+              </div>
+            )}
             <div className="float-right">
               <Button variant="outline-primary" className="mr-2" onClick={onCancel}>
                 Cancel
