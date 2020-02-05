@@ -7,8 +7,9 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
   PaginationProvider,
   PaginationListStandalone,
-  SizePerPageDropdownStandalone,
+  // SizePerPageDropdownStandalone,
 } from 'react-bootstrap-table2-paginator';
+import ToolkitProvider, { CSVExport, Search } from 'react-bootstrap-table2-toolkit';
 
 import {
   useGetProductsQuery,
@@ -21,6 +22,9 @@ import {
 import ProductForm from './ProductForm';
 import { Alert, Error, Loading } from '../shared';
 import withAuth from '../../utils/withAuth';
+
+const { ExportCSVButton } = CSVExport;
+const { SearchBar } = Search;
 
 const imageFormatter = (cell: any) => (
   <img src={`${process.env.BACKEND_URL}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
@@ -89,6 +93,14 @@ const columns = [
     formatter: isActiveFormatter,
   },
 ];
+
+const options = {
+  pageStartIndex: 1,
+  onPageChange: () => {
+    window.scrollTo(0, 0);
+  },
+  sizePerPageList: [10, 20, 30, 40, 50, 99],
+};
 
 const defaultSorted = [
   {
@@ -257,80 +269,96 @@ const Products: NextPage<Props> = () => {
       <NextSeo title="Products" description="List of Products" />
       <Alert show={alert.show} type={alert.type} message={alert.message} onClose={() => setAlert({ show: false })} />
       <div className="animated fadeIn">
-        <PaginationProvider
-          pagination={paginationFactory({
-            custom: true,
-            page: 1,
-            sizePerPage: 10,
-            totalSize: data && data.getProducts.length,
-          })}
-        >
-          {({ paginationProps, paginationTableProps }: any) => (
-            <>
-              <Row>
-                <Col xs="12">
-                  <Card>
-                    <Card.Header>
-                      <div className="d-flex d-column justify-content-between align-items-center">
-                        <div>
-                          <i className="fas fa-align-justify mr-2" />
-                          <strong>PRODUCTS</strong>
-                        </div>
-                        <div>
-                          <button className="btn bg-primary btn-circle" onClick={() => setModalShow(true)}>
-                            <i className="fas fa-plus text-white" />
-                          </button>
-                        </div>
-                      </div>
-                    </Card.Header>
-                    <Card.Body>
-                      <div className="d-flex d-column justify-content-between">
-                        <div className="d-none d-sm-block">
-                          Show <SizePerPageDropdownStandalone className="mx-2 bg-light" {...paginationProps} /> entries
-                        </div>
-                        <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm col-md-6">
-                          <input
-                            className="form-control"
-                            type="text"
-                            placeholder="Search"
-                            value=""
-                            onChange={() => null}
-                            style={{ height: '35px' }}
-                          />
-                          <button
-                            className="btn btn-outline-primary react-bs-table-search-clear-btn ml-2"
-                            type="button"
-                            style={{ width: '75px' }}
-                          >
-                            Search
-                          </button>
-                        </div>
-                        <div className="d-none d-sm-block">
-                          <PaginationListStandalone {...paginationProps} />
-                        </div>
-                      </div>
-                      <div className="table-responsive">
-                        <BootstrapTable
-                          bootstrap4
-                          keyField="id"
-                          data={data && data.getProducts}
-                          columns={columns}
-                          rowStyle={{ verticalAlign: 'middle' }}
-                          defaultSorted={defaultSorted}
-                          rowEvents={rowEvents}
-                          bordered={false}
-                          hover
-                          {...paginationTableProps}
-                        />
-                        <hr />
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </>
-          )}
-        </PaginationProvider>
+        <Row>
+          <Col xs="12">
+            <Card style={{ cursor: 'pointer' }}>
+              <Card.Header>
+                <div className="d-flex d-column justify-content-between align-items-center">
+                  <div>
+                    <i className="fas fa-align-justify mr-2" />
+                    <strong>PRODUCTS</strong>
+                  </div>
+                  <div>
+                    <button className="btn bg-primary btn-circle" onClick={() => setModalShow(true)}>
+                      <i className="fas fa-plus text-white" />
+                    </button>
+                  </div>
+                </div>
+              </Card.Header>
+              <Card.Body>
+                <div className="table-responsive">
+                  <PaginationProvider
+                    pagination={paginationFactory({
+                      custom: true,
+                      page: 1,
+                      sizePerPage: 10,
+                      ...options,
+                      totalSize: data && data.getProducts.length,
+                    })}
+                  >
+                    {({ paginationProps, paginationTableProps }: any) => (
+                      <ToolkitProvider
+                        bootstrap4
+                        keyField="id"
+                        data={data && data.getProducts}
+                        columns={columns}
+                        rowStyle={{ verticalAlign: 'middle' }}
+                        defaultSorted={defaultSorted}
+                        exportCSV={{
+                          onlyExportFiltered: true,
+                          exportAll: false,
+                        }}
+                        hover
+                        search
+                      >
+                        {(props: any) => (
+                          <div>
+                            <div className="d-flex d-column justify-content-between">
+                              <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm col-md-11">
+                                <SearchBar
+                                  {...props.searchProps}
+                                  className="text-center"
+                                  style={{ height: '35px' }}
+                                  placeholder="Enter your search terms..."
+                                />
+                              </div>
+                              <div className="d-none d-sm-block">
+                                <ExportCSVButton
+                                  {...props.csvProps}
+                                  className="btn btn-outline-primary"
+                                  style={{ width: '100px' }}
+                                >
+                                  Export CSV
+                                </ExportCSVButton>
+                              </div>
+                            </div>
+                            <BootstrapTable
+                              rowEvents={rowEvents}
+                              bordered={false}
+                              striped
+                              {...props.baseProps}
+                              {...paginationTableProps}
+                            />
+                            <hr />
+                            <div className="d-flex d-column justify-content-end">
+                              {/* <div className="d-none d-sm-block">
+                                Show <SizePerPageDropdownStandalone className="mx-2 bg-primary" {...paginationProps} />{' '}
+                                entries
+                              </div> */}
+                              <div className="d-none d-sm-block">
+                                <PaginationListStandalone {...paginationProps} />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </ToolkitProvider>
+                    )}
+                  </PaginationProvider>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
         {modalShow && (
           <ProductForm onSubmit={handleSubmit} onCancel={closeModal} onDelete={handleDelete} product={product} />
         )}

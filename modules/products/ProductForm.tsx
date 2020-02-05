@@ -118,7 +118,7 @@ const ProductForm: NextPage<Props> = ({ onCancel, onSubmit, onDelete, product })
                 <small className="form-text text-muted">Max Size 3MB</small>
               </Form.Group>
               <hr />
-              {!!product.id && (
+              {product && (
                 <div className="float-left">
                   <Button variant="danger" className="mr-2" onClick={() => setShowConfirmationDialog(true)}>
                     Delete

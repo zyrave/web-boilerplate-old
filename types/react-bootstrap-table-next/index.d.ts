@@ -397,6 +397,11 @@ There's only one different for dummy column than normal column, which is dummy c
 type RowT<FieldId extends string = string> = {
   [fieldName in FieldId]: RowFieldValue;
 };
+
+declare module 'react-bootstrap-table2-editor' {
+  export default function editorFactory<todo extends TODO>(props?: CellEditProps): CellEdit;
+}
+
 declare module 'react-bootstrap-table2-filter' {
   export default function filterFactory<Type extends TODO>(options?: FilterOptions): FilterProps<Type>;
   function textFilter(props?: TextFilterProps): TODO;
@@ -408,6 +413,10 @@ declare module 'react-bootstrap-table2-filter' {
   const Comparator: PredefinedComparators;
 }
 
+declare module 'react-bootstrap-table2-overlay' {
+  export default function overlayFactory(props?: OverlayOptions): Overlay;
+}
+
 declare module 'react-bootstrap-table2-paginator' {
   export default function paginationFactory(options?: /*PaginationProps*/ TODO): Pagination;
   function PaginationProvider(props?: TODO): TODO;
@@ -415,10 +424,8 @@ declare module 'react-bootstrap-table2-paginator' {
   function SizePerPageDropdownStandalone(props?: TODO): TODO;
 }
 
-declare module 'react-bootstrap-table2-editor' {
-  export default function editorFactory<todo extends TODO>(props?: CellEditProps): CellEdit;
-}
-
-declare module 'react-bootstrap-table2-overlay' {
-  export default function overlayFactory(props?: OverlayOptions): Overlay;
+declare module 'react-bootstrap-table2-toolkit' {
+  export default function ToolkitProvider(props?: TODO): TODO;
+  const CSVExport;
+  const Search;
 }
