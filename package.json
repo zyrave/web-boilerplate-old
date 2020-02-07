@@ -1,7 +1,7 @@
 {
-  "name": "ts-nextjs-graphql-boilerplate",
+  "name": "web-boilerplate",
   "version": "1.0.0",
-  "description": "NEXT.js GraphQL Boilerplate",
+  "description": "Web Boilerplate with Next.js, TypeScript, GraphQL",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -1,1 +1,1 @@
-# NEXT.js GraphQL Boilerplate
+# Web Boilerplate with Next.js, TypeScript, GraphQL
