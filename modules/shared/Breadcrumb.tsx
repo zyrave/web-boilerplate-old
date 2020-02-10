@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { FC } from 'react';
 import Link from 'next/link';
 import { withRouter, NextRouter } from 'next/router';
@@ -56,6 +57,8 @@ interface Props {
 
 const Breadcrumb: FC<Props> = ({ className = '', appRoutes, router }) => {
   const classes = classNames(className);
+
+  if (_.isEmpty(router)) return <></>;
 
   return <div className={classes}>{Breadcrumbs(router, appRoutes)}</div>;
 };
