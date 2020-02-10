@@ -70,7 +70,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
               </ListGroup.Item>
               <ListGroup.Item action as="a" href="#" className="list-group-item-accent-warning list-group-item-divider">
                 <div className="avatar float-right">
-                  <img className="img-avatar" src="../../static/images/avatars/7.jpg" alt="admin@bootstrapmaster.com" />
+                  <img className="img-avatar" src="/images/avatars/7.jpg" alt="admin@bootstrapmaster.com" />
                 </div>
                 <div>
                   Meeting with <strong>Lucas</strong>{' '}
@@ -85,7 +85,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
               </ListGroup.Item>
               <ListGroup.Item action as="a" href="#" className="list-group-item-accent-info list-group-item-divider">
                 <div className="avatar float-right">
-                  <img className="img-avatar" src="../../static/images/avatars/4.jpg" alt="admin@bootstrapmaster.com" />
+                  <img className="img-avatar" src="/images/avatars/4.jpg" alt="admin@bootstrapmaster.com" />
                 </div>
                 <div>
                   Skype with <strong>Megan</strong>
@@ -115,39 +115,19 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
                 </small>
                 <div className="avatars-stack mt-2">
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/2.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/2.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/3.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/3.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/4.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/4.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/5.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/5.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/6.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                 </div>
               </ListGroup.Item>
@@ -178,53 +158,25 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
                 </small>
                 <div className="avatars-stack mt-2">
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/2.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/2.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/3.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/3.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/4.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/4.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/5.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/5.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/6.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/7.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                   <div className="avatar avatar-xs">
-                    <img
-                      src={'../../static/images/avatars/8.jpg'}
-                      className="img-avatar"
-                      alt="admin@bootstrapmaster.com"
-                    />
+                    <img src={'/images/avatars/8.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   </div>
                 </div>
               </ListGroup.Item>
@@ -234,11 +186,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
             <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
                 <div className="avatar">
-                  <img
-                    src={'../../static/images/avatars/7.jpg'}
-                    className="img-avatar"
-                    alt="admin@bootstrapmaster.com"
-                  />
+                  <img src={'/images/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   <span className="avatar-status badge-success" />
                 </div>
               </div>
@@ -255,11 +203,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
             <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
                 <div className="avatar">
-                  <img
-                    src={'../../static/images/avatars/7.jpg'}
-                    className="img-avatar"
-                    alt="admin@bootstrapmaster.com"
-                  />
+                  <img src={'/images/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   <span className="avatar-status badge-success" />
                 </div>
               </div>
@@ -276,11 +220,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
             <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
                 <div className="avatar">
-                  <img
-                    src={'../../static/images/avatars/7.jpg'}
-                    className="img-avatar"
-                    alt="admin@bootstrapmaster.com"
-                  />
+                  <img src={'/images/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   <span className="avatar-status badge-success" />
                 </div>
               </div>
@@ -297,11 +237,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
             <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
                 <div className="avatar">
-                  <img
-                    src={'../../static/images/avatars/7.jpg'}
-                    className="img-avatar"
-                    alt="admin@bootstrapmaster.com"
-                  />
+                  <img src={'/images/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   <span className="avatar-status badge-success" />
                 </div>
               </div>
@@ -318,11 +254,7 @@ const Aside: React.FC<Props> = ({ className, display = '', fixed = false, offCan
             <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
                 <div className="avatar">
-                  <img
-                    src={'../../static/images/avatars/7.jpg'}
-                    className="img-avatar"
-                    alt="admin@bootstrapmaster.com"
-                  />
+                  <img src={'/images/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
                   <span className="avatar-status badge-success" />
                 </div>
               </div>

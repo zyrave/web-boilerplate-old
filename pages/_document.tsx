@@ -31,8 +31,8 @@ export default class MyDocument extends Document {
     return (
       <html lang="id">
         <Head>
-          <link rel="stylesheet" href="/static/css/simple-line-icons.css" />
-          <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+          <link rel="stylesheet" href="/css/simple-line-icons.css" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         </Head>
         <body className="custom_class">
           <Main />

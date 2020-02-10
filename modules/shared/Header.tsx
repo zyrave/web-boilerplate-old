@@ -28,13 +28,13 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
       <SidebarToggler className="d-lg-none" display="md" mobile />
       <NavbarBrand
         full={{
-          src: '/static/images/brand/logo.svg',
+          src: '/images/brand/logo.svg',
           width: 89,
           height: 25,
           alt: 'CoreUI Logo',
         }}
         minimized={{
-          src: '/static/images/brand/sygnet.svg',
+          src: '/images/brand/sygnet.svg',
           width: 30,
           height: 30,
           alt: 'CoreUI Logo',
@@ -85,7 +85,7 @@ const Header: React.FC<Props> = ({ className, fixed = false, onLogout, ...attrib
         </Nav.Item>
         <Dropdown className="nav-item mr-2">
           <Dropdown.Toggle id="" className="nav-link" as="a">
-            <img src={'/static/images/avatars/0.jpg'} className="img-avatar" alt="admin@company.com" />
+            <img src={'/images/avatars/0.jpg'} className="img-avatar" alt="admin@company.com" />
           </Dropdown.Toggle>
           <Dropdown.Menu alignRight>
             <Dropdown.Header as="div" className="text-center">

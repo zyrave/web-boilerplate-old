@@ -314,7 +314,7 @@ const Products: NextPage<Props> = () => {
                         {(props: any) => (
                           <div>
                             <div className="d-flex d-column justify-content-between">
-                              <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm col-md-11">
+                              <div className="form-group form-group-sm react-bs-table-search-form input-group input-group-sm">
                                 <SearchBar
                                   {...props.searchProps}
                                   className="text-center"
@@ -322,7 +322,7 @@ const Products: NextPage<Props> = () => {
                                   placeholder="Enter your search terms..."
                                 />
                               </div>
-                              <div className="d-none d-sm-block">
+                              <div className="d-none d-sm-block ml-3">
                                 <ExportCSVButton
                                   {...props.csvProps}
                                   className="btn btn-outline-primary"
