@@ -1,0 +1,28 @@
+# base image
+FROM node:12-alpine
+
+# Install tools required for project
+RUN apk update
+RUN apk add --no-cache bash
+
+# create app directory and use it as the working directory
+RUN mkdir -p /usr/src/app/web
+WORKDIR /usr/src/app/web
+
+# Copy all files to the working directory
+COPY . .
+
+# Install and cache app dependencies
+RUN yarn
+
+# expose ports
+EXPOSE 3000
+
+# disable next.js telemetry
+RUN npx next telemetry disable
+
+# rebuild node-sass
+RUN npm rebuild node-sass
+
+# start app
+CMD yarn dev

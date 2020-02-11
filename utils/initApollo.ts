@@ -22,7 +22,7 @@ interface Options {
 
 function create(initialState: any, { getToken }: Options) {
   const uploadLink = createUploadLink({
-    uri: `${process.env.BACKEND_URL}/graphql`,
+    uri: `${process.env.API_ENDPOINT}/graphql`,
     credentials: 'include',
     headers: {
       'keep-alive': 'true',

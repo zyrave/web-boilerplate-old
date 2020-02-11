@@ -21,7 +21,7 @@ module.exports = withFonts(
         return config;
       },
       env: {
-        BACKEND_URL: process.env.BACKEND_URL
+        API_ENDPOINT: `${ process.env.APP_PROTOCOL }://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`,
       }
     })
   )

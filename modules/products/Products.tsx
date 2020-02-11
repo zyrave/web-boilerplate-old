@@ -27,7 +27,7 @@ const { ExportCSVButton } = CSVExport;
 const { SearchBar } = Search;
 
 const imageFormatter = (cell: any) => (
-  <img src={`${process.env.BACKEND_URL}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
+  <img src={`${process.env.API_ENDPOINT}/uploads/images/${cell}`} alt="" style={{ width: 50 }} />
 );
 const priceFormatter = (cell: any) => <span>${cell}</span>;
 const isActiveFormatter = (cell: any) => (
@@ -104,7 +104,7 @@ const options = {
 
 const defaultSorted = [
   {
-    dataField: 'id',
+    dataField: 'name',
     order: 'asc',
   },
 ];
