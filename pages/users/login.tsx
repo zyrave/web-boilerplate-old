@@ -99,11 +99,11 @@ const Login: NextPage = () => {
                             {loading ? (
                               <Button type="submit" variant="primary" block disabled>
                                 <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
-                                Loading...
+                                Signing in...
                               </Button>
                             ) : (
                               <Button type="submit" color="primary" block>
-                                Login
+                                Sign in
                               </Button>
                             )}
                           </Col>
