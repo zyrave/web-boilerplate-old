@@ -7,11 +7,11 @@ import * as yup from 'yup';
 import ConfirmationDialog from '../../modules/shared/ConfirmationDialog';
 
 const schema = yup.object({
-  name: yup.string().required('Required Field'),
-  category: yup.string().required('Required Field'),
-  price: yup.number().required('Required Field'),
-  quantity: yup.number().required('Required Field'),
-  isActive: yup.bool().required('Required Field'),
+  name: yup.string().required(`Name can't be blank`),
+  category: yup.string().required(`Category can't be blank`),
+  price: yup.number().required(`Price can't be blank`),
+  quantity: yup.number().required(`Quantity can't be blank`),
+  isActive: yup.bool().required(`Status can't be blank`),
 });
 
 interface Props {

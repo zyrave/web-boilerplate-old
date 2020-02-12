@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { FieldProps } from 'formik';
-import { InputGroup, FormControl } from 'react-bootstrap';
+import { InputGroup, Form } from 'react-bootstrap';
 
 interface InputProps {
   props: any;
@@ -20,9 +20,9 @@ export const InputField: FC<FieldProps & InputProps> = ({ field, form: { errors,
             </InputGroup.Text>
           </InputGroup.Prepend>
         )}
-        <FormControl {...field} {...props} />
+        <Form.Control {...field} {...props} isInvalid={!!errorMessage} />
+        <Form.Control.Feedback type="invalid">{errorMessage}</Form.Control.Feedback>
       </InputGroup>
-      {errorMessage && <div className="text-danger">{errorMessage}</div>}
     </>
   );
 };

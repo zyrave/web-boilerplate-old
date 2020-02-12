@@ -4,16 +4,36 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
-import { Alert, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Modal, Row, Spinner } from 'react-bootstrap';
+import * as yup from 'yup';
 
 import { InputField } from '../../modules/shared/fields/InputField';
 import { useRegisterMutation } from '../../generated/graphql';
 
+const schema = yup.object({
+  firstName: yup.string().required(`First Name can't be blank`),
+  lastName: yup.string().required(`Last Name can't be blank`),
+  email: yup
+    .string()
+    .email('Invalid email')
+    .required(`Email can't be blank`),
+  password: yup
+    .string()
+    .min(6, 'Use 6 characters or more for your password')
+    .required('Enter a password'),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], `Passwords doesn't match`),
+});
+
 interface Props {}
 
 const Register: NextPage<Props> = () => {
-  const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [register] = useRegisterMutation();
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [register, { loading }] = useRegisterMutation();
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    Router.push('/users/login');
+  };
 
   return (
     <>
@@ -21,15 +41,13 @@ const Register: NextPage<Props> = () => {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="5">
+            <Col sm="11" md="9" lg="5">
               <Card className="mx-4">
                 <Card.Body className="p-4">
                   <h1 className="text-center">Register</h1>
                   <p className="text-center text-muted">Create an account</p>
-                  <Alert variant="danger" show={showAlert} className="text-center">
-                    Password doesn't match. Try again.
-                  </Alert>
                   <Formik
+                    validationSchema={schema}
                     initialValues={{
                       firstName: '',
                       lastName: '',
@@ -38,41 +56,54 @@ const Register: NextPage<Props> = () => {
                       confirmPassword: '',
                     }}
                     onSubmit={async (data, { setErrors }) => {
-                      if (data.password !== data.confirmPassword) {
-                        setShowAlert(true);
-                        return;
-                      }
-
-                      setShowAlert(false);
                       delete data.confirmPassword;
 
                       try {
                         await register({ variables: { data } });
-                        Router.push('/users/check-email');
+                        setShowModal(true);
                       } catch (err) {
                         const errors: { [key: string]: string } = {};
 
-                        err.graphQLErrors[0].extensions.exception.validationErrors.map((validationErr: any) => {
-                          Object.values(validationErr.constraints).map((message: any) => {
-                            errors[validationErr.property] = message;
+                        err &&
+                          err.graphQLErrors &&
+                          err.graphQLErrors[0].extensions.exception.validationErrors.map((validationErr: any) => {
+                            Object.values(validationErr.constraints).map((message: any) => {
+                              errors[validationErr.property] = message;
+                            });
                           });
-                        });
                         setErrors(errors);
                       }
                     }}
-                    validateOnBlur={false}
-                    validateOnChange={false}
                   >
                     {({ handleSubmit }) => (
                       <Form onSubmit={handleSubmit}>
-                        <Field name="firstName" placeholder="First Name *" icon="icon-user" component={InputField} />
-                        <Field name="lastName" placeholder="Last Name *" icon="icon-user" component={InputField} />
-                        <Field name="email" placeholder="Email *" icon="icon-envelope" component={InputField} />
+                        <Field
+                          name="firstName"
+                          placeholder="First Name *"
+                          icon="icon-user"
+                          disabled={loading}
+                          component={InputField}
+                        />
+                        <Field
+                          name="lastName"
+                          placeholder="Last Name *"
+                          icon="icon-user"
+                          disabled={loading}
+                          component={InputField}
+                        />
+                        <Field
+                          name="email"
+                          placeholder="Email *"
+                          icon="icon-envelope"
+                          disabled={loading}
+                          component={InputField}
+                        />
                         <Field
                           name="password"
                           type="password"
                           placeholder="Password *"
                           icon="icon-lock"
+                          disabled={loading}
                           component={InputField}
                         />
                         <Field
@@ -80,13 +111,21 @@ const Register: NextPage<Props> = () => {
                           type="password"
                           placeholder="Password (Confirm) *"
                           icon="icon-lock"
+                          disabled={loading}
                           component={InputField}
                         />
                         <Row className="mt-3">
                           <Col>
-                            <Button type="submit" color="primary" block>
-                              Create Account
-                            </Button>
+                            {loading ? (
+                              <Button type="submit" variant="primary" block disabled>
+                                <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                                Loading...
+                              </Button>
+                            ) : (
+                              <Button type="submit" color="primary" block>
+                                Create Account
+                              </Button>
+                            )}
                           </Col>
                         </Row>
                       </Form>
@@ -110,6 +149,17 @@ const Register: NextPage<Props> = () => {
           </Row>
         </Container>
       </div>
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Information</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Please check your email to confirm your account</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

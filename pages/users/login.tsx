@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { NextSeo } from 'next-seo';
 import React, { useState } from 'react';
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 
 import { useLoginMutation, MeDocument } from '../../generated/graphql';
 import { InputField } from '../../modules/shared/fields/InputField';
@@ -16,7 +16,7 @@ const Login: NextPage = () => {
     type: 'success',
     message: '',
   });
-  const [login] = useLoginMutation();
+  const [login, { loading }] = useLoginMutation();
 
   return (
     <>
@@ -96,9 +96,16 @@ const Login: NextPage = () => {
                         />
                         <Row className="mt-3">
                           <Col>
-                            <Button type="submit" color="primary" block>
-                              Login
-                            </Button>
+                            {loading ? (
+                              <Button type="submit" variant="primary" block disabled>
+                                <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                                Loading...
+                              </Button>
+                            ) : (
+                              <Button type="submit" color="primary" block>
+                                Login
+                              </Button>
+                            )}
                           </Col>
                         </Row>
                       </Form>

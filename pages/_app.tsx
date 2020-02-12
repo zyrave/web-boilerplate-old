@@ -28,7 +28,8 @@ class App extends NextApp<any, State> {
     if (
       router.pathname.startsWith('/users/login') ||
       router.pathname.startsWith('/users/register') ||
-      router.pathname.startsWith('/users/forgot-password')
+      router.pathname.startsWith('/users/forgot-password') ||
+      router.pathname.startsWith('/users/change-password')
     ) {
       return (
         <ApolloProvider client={apolloClient}>
